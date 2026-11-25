@@ -68,11 +68,11 @@ Shared components in `src/components`: `Header`, `Navbar`, `MobileMenu`, `Footer
 
 ### Known problems
 
-Each one is assigned to a phase in `plan.md`. Remove a row when its fix is merged.
+From a quick review, not a full audit. Phase 0 starts with the full audit and updates this table. Each one is assigned to a phase in `plan.md`. Remove a row when its fix is merged.
 
 | #  | Area          | Problem                                                                                                                              | Phase |
 | -- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----- |
-| 1  | Security      | `npm audit` reports a **critical** advisory set for Next.js 15.3.0, including remote code execution, plus high ones in dependencies such as `sharp`. | 0     |
+| 1  | Security      | `npm audit` reports a **critical** advisory set for Next.js 15.3.0, including remote code execution, plus high ones in `nodemailer`, `sharp` and PostCSS. | 0     |
 | 2  | Tooling       | Two lockfiles: `package-lock.json` (tracked) and `pnpm-lock.yaml` (untracked).                                                       | 0     |
 | 3  | Tooling       | `lint` runs `next lint`, which newer Next.js removes. No `typecheck` or `test` script.                                               | 0     |
 | 4  | Config        | `next.config.ts` uses `module.exports` and the deprecated `images.domains`.                                                          | 0     |

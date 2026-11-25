@@ -17,7 +17,7 @@ Values: `Not started`, `In progress`, `Blocked` (say why), `Done`.
 
 | Phase | Name                          | Status      | Notes |
 | ----- | ----------------------------- | ----------- | ----- |
-| 0     | Foundation and upgrade        | Not started | Vercel setup is not finished. The first deployment (`c1bd7b3`) failed on 2026-11-25, likely the vulnerable Next.js 15.3.0; confirm in the build log. |
+| 0     | Audit, foundation and upgrade | Not started | Vercel setup is not finished. The first deployment (`c1bd7b3`) failed on 2026-11-25, likely the vulnerable Next.js 15.3.0; confirm in the build log. |
 | 1     | Design system and layout      | Not started |       |
 | 2     | Pages                         | Not started |       |
 | 3     | Contact and Brevo             | Not started |       |
@@ -26,14 +26,34 @@ Values: `Not started`, `In progress`, `Blocked` (say why), `Done`.
 
 ---
 
-## Phase 0 — Foundation and upgrade
+## Phase 0 — Audit, foundation and upgrade
 
-**Goal:** a safe, clean base that builds and deploys. The site looks the same.
+**Goal:** an audited, safe, clean base that builds and deploys. The site looks the same.
 
 **Needed from the owner:** finish connecting the repo to Vercel. The upgrade (#1) comes first, so a deployment can succeed.
 
+### Step 1 — Audit the project (always first)
+
+Do this before changing any code. `project.md` §4 is a starting point from a quick review, not a full audit.
+
+| Area           | Check                                                                              |
+| -------------- | ---------------------------------------------------------------------------------- |
+| Dependencies   | Known advisories, outdated and unused packages                                     |
+| Security       | Every rule in `project.md` §9, API input handling, headers, error leaks            |
+| Secrets        | Working tree and full git history; personal data in the code (the repo is public)  |
+| Build and deploy | Install, build, lint, types; why the Vercel deployment fails                     |
+| Bugs           | Every page and control in the browser, at phone and desktop width                  |
+| Quality        | Accessibility, performance and SEO baseline (`project.md` §8)                      |
+
+1. Add each finding to `project.md` §4 with its severity and phase. Remove rows that turn out to be wrong.
+2. Show the owner the findings, most severe first, and wait for approval.
+3. Then fix. Security and build problems are fixed in this phase; design and content problems go to their phase.
+
+### Step 2 — Fix and set up
+
 | Includes                                                                                      | project.md |
 | --------------------------------------------------------------------------------------------- | ---------- |
+| Fix the security problems and bugs the audit assigns to this phase                          | §4, §9     |
 | Upgrade Next.js (and `eslint-config-next`) to the latest patched release; clear the audit (#1) | §3, §9     |
 | pnpm only: commit `pnpm-lock.yaml` and `pnpm-workspace.yaml`, delete `package-lock.json` (#2)  | §3         |
 | Scripts `lint` (ESLint CLI), `typecheck`, `test` (Vitest, one first test) (#3)                | §3         |
@@ -41,7 +61,7 @@ Values: `Not started`, `In progress`, `Blocked` (say why), `Done`.
 | `.env.example`, with `.gitignore` allowing it; a real `README.md`                             | §11        |
 | CI on every PR: lint, typecheck, test, build                                                  |            |
 
-**Done when:** all four checks pass; the production audit shows no critical or high advisories; a PR gets a preview where all four pages work.
+**Done when:** the audit findings are recorded in `project.md` §4; every security and build finding is fixed or the owner has accepted it; all four checks pass; the production audit shows no critical or high advisories; a PR gets a preview where all four pages work.
 
 ---
 

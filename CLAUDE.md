@@ -5,8 +5,9 @@ A portfolio website for a wedding stationery and live illustration studio. Next.
 ## Start here
 
 1. Read the status table in `docs/plan.md`. Work on the first phase that isn't `Done`, unless the owner asks for something else.
-2. Read that phase, then only the `docs/project.md` sections it lists, plus §3 (stack and constraints) and §9 (security).
-3. Check the code before trusting the docs. If they disagree, say so and fix the doc.
+2. Phase 0 begins with a project audit. Report the findings before changing code.
+3. Read that phase, then only the `docs/project.md` sections it lists, plus §3 (stack and constraints) and §9 (security).
+4. Check the code before trusting the docs. If they disagree, say so and fix the doc.
 
 | File              | Read it for                                                                 |
 | ----------------- | --------------------------------------------------------------------------- |
