@@ -20,7 +20,7 @@ The build order for Haperd & Co. `docs/project.md` describes each item in detail
 
 **Lanes:** one. The lead plans it like any other phase, and gives every task to one developer.
 
-**Needed from the product owner:** nothing at the start. Finish connecting the repo to Vercel during this phase, after the Next.js upgrade (#1) is merged and before the last task: allow `*.vercel.app` in each developer's sandbox, and add `VERCEL_AUTOMATION_BYPASS_SECRET` to each developer's env file (Vercel → Deployment Protection → Protection Bypass for Automation). The lead plans the Vercel check as the last task.
+**Needed from the product owner:** nothing at the start. The Vercel project exists (`zambrana90s-projects/haperd`) and checks the repo's commits. During this phase, after the Next.js upgrade (#1) is merged and before the last task: turn off automatic production promotion, allow `*.vercel.app` in each developer's sandbox, and add `VERCEL_AUTOMATION_BYPASS_SECRET` to each developer's env file (Vercel → Deployment Protection → Protection Bypass for Automation). The lead plans the Vercel check as the last task.
 
 The first deployment (`c1bd7b3`) failed on 2026-11-25, likely because of the vulnerable Next.js 15.3.0. Confirm in the build log.
 
