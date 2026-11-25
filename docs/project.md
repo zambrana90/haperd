@@ -2,7 +2,7 @@
 
 A portfolio website for Haperd & Co., a studio that designs wedding stationery and paints live illustrations at events. A visitor learns what the studio does, meets María, and sends a message.
 
-This file is the source of truth for **what** we build. `docs/plan.md` says **in what order**, and tracks phase status.
+This file is the source of truth for **what** we build. `docs/plan.md` says **in what order**. Tasks, owners and status live in JSM HQ.
 
 ---
 
