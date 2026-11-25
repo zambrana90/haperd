@@ -255,7 +255,7 @@ src/
 public/           # images, icons
 docs/
   project.md      # this file
-  plan.md         # phases and status
+  plan.md         # phases and lanes
 ```
 
 ---
