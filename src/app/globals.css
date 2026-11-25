@@ -24,3 +24,8 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+p {
+  font-size: 1rem; /* slightly smaller than text-xl */
+  line-height: 1.75; /* increased line spacing for readability */
+}
