@@ -269,7 +269,7 @@ The owner answers these. Delete a row once answered, and write the answer where 
 
 | #  | Question                                                                                                     | Needed by |
 | -- | ------------------------------------------------------------------------------------------------------------ | --------- |
-| 1  | Missing images: María's portrait, logo, a larger hero (if there is one)                           | Phase 2   |
+| 1  | Missing images: María's portrait, logo, a larger hero (if there is one)                                      | Phase 2   |
 | 2  | WhatsApp number                                                                                              | Phase 2   |
 | 3  | The "¿Cómo trabajamos?" steps                                                                                | Phase 2   |
 | 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 5   |
