@@ -1,31 +1,112 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Design tokens (docs/project.md §7). Token names are shared by both lanes:
+ * renaming or removing one is a contract change.
+ *
+ * Contrast (WCAG 2.2). Normal text needs 4.5:1, large text (24px, or 18.66px
+ * bold) needs 3:1.
+ *
+ * | Text                | Background | Ratio | Use                 |
+ * | ------------------- | ---------- | ----- | ------------------- |
+ * | ink / navy          | white      | 14.84 | Any text            |
+ * | ink / navy          | off-white  | 13.91 | Any text            |
+ * | ink / navy          | blush      | 12.26 | Any text            |
+ * | ink / navy          | rose       |  5.05 | Any text            |
+ * | ink / navy          | rose-soft  |  4.86 | Any text            |
+ * | rose-ink            | white      |  6.51 | Any text            |
+ * | rose-ink            | off-white  |  6.10 | Any text            |
+ * | rose-ink            | blush      |  5.38 | Any text            |
+ * | rose-deep           | white      |  5.56 | Any text            |
+ * | rose-deep           | off-white  |  5.21 | Any text            |
+ * | rose-deep           | blush      |  4.59 | Any text            |
+ * | white               | navy       | 14.84 | Any text            |
+ * | white               | rose-deep  |  5.56 | Any text            |
+ * | off-white           | navy       | 13.91 | Any text            |
+ * | off-white           | rose-deep  |  5.21 | Any text            |
+ * | blush               | navy       | 12.26 | Any text            |
+ * | blush               | rose-deep  |  4.59 | Any text            |
+ * | rose                | navy       |  5.05 | Any text            |
+ * | rose-soft           | navy       |  4.86 | Any text            |
+ * | rose-soft           | white      |  3.05 | Large text only     |
+ *
+ * Every other pair fails. In particular, never put white text on rose (2.94),
+ * or rose / rose-soft text on off-white or blush.
+ */
+@theme {
+  /* Colors: rose, soft rose and blush are for surfaces and decoration. */
+  --color-rose: #bd8a87;
+  --color-rose-soft: #b18a8b;
+  --color-rose-deep: #8b5c5a;
+  --color-navy: #2a2341;
+  --color-blush: #f5e6e6;
+  --color-white: #ffffff;
+  --color-off-white: #fbf7f2;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Text-safe colors */
+  --color-ink: var(--color-navy);
+  --color-rose-ink: #7f5250;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Spacing that adapts to the viewport, on top of Tailwind's scale */
+  --spacing-gutter: clamp(1rem, 4vw, 2rem);
+  --spacing-section: clamp(3rem, 8vw, 6rem);
+
+  /* Radius */
+  --radius-field: 0.75rem;
+  --radius-card: 1.5rem;
+  --radius-pill: 9999px;
+
+  /* Shadows, tinted with navy */
+  --shadow-soft: 0 4px 16px -4px rgb(42 35 65 / 0.12);
+  --shadow-lifted: 0 12px 32px -8px rgb(42 35 65 / 0.2);
+
+  /* Motion */
+  --transition-duration-fast: 150ms;
+  --transition-duration-base: 300ms;
+  --transition-duration-slow: 600ms;
+  --ease-gentle: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-in: fade-in var(--transition-duration-slow) var(--ease-gentle)
+    both;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* `inline` because next/font sets these variables on <html> (layout.tsx). */
+@theme inline {
+  --font-sans: var(--font-quicksand), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  /* sans-serif on purpose: symbols Geist Mono lacks (the nav star) stay large. */
+  --font-mono: var(--font-geist-mono), sans-serif;
+  --font-script: var(--font-dancing-script), cursive;
 }
 
-p {
-  font-size: 1rem; /* slightly smaller than text-xl */
-  line-height: 1.75; /* increased line spacing for readability */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --animate-fade-in: none;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  /* Text size utilities set their own line height and win over this. */
+  p {
+    line-height: 1.75;
+  }
 }
