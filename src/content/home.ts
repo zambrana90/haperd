@@ -15,7 +15,7 @@ export type Service = {
   link: { href: string; label: string };
 };
 
-/** In reading order. On wide screens the second card sits lower. */
+/** In reading order, one row each. */
 export const SERVICES: readonly Service[] = [
   {
     title: 'Papelería de boda',
