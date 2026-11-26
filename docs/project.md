@@ -81,7 +81,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
-| 3  | medium   | Tooling | `lint` runs the deprecated `next lint`, which newer Next.js removes. The ESLint config ignores no folders, so `eslint .` reports thousands of errors once `.next` exists. No `typecheck` or `test` script. | 0 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 26 | medium   | Security | No `X-Content-Type-Options`, `X-Frame-Options` (or equivalent frame rule), `Referrer-Policy` or `Permissions-Policy` header. `X-Powered-By` is sent (`poweredByHeader: false` removes it). | 0 |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
