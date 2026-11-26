@@ -27,7 +27,7 @@ Portfolio website for Haperd & Co., a wedding stationery and live illustration s
    pnpm dev
    ```
 
-The pages run without any values. Sending the contact form needs `CONTACT_TO_EMAIL` and the `SMTP_*` variables.
+The pages run without any values. Sending the contact form needs `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME` and `CONTACT_TO_EMAIL`.
 
 ## Commands
 

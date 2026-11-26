@@ -3,6 +3,9 @@ import { TIMEOUT_MS } from './brevo';
 import { EmailError, sendConfirmation, sendNotification } from './index';
 import { confirmationTemplate, escapeHtml } from './templates';
 
+// It throws outside a server bundle, and tests are not bundled by Next.
+vi.mock('server-only', () => ({}));
+
 const ENV = {
   BREVO_API_KEY: 'test-api-key',
   BREVO_SENDER_EMAIL: 'sender@example.com',
