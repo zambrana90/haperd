@@ -52,7 +52,7 @@ When this works end to end on a phone and a desktop, the product is done.
 
 ## 4. Current state
 
-Checked on 2026-11-26, at commit `876cc58`. Updated for the Next.js 16 upgrade: `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6. The only test is a smoke test.
+Checked on 2026-11-26, at commit `876cc58`. Updated for the Next.js 16 upgrade: `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6. The only tests cover the security headers.
 
 ### What exists
 
@@ -80,7 +80,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
-| 26 | medium   | Security | No `X-Content-Type-Options`, `X-Frame-Options` (or equivalent frame rule), `Referrer-Policy` or `Permissions-Policy` header. `X-Powered-By` is sent (`poweredByHeader: false` removes it). | 0 |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
 | 27 | medium   | Errors | `error.tsx` shows the raw error message to visitors (§9) and logs the error in the browser console. | 0 |
 | 6  | medium   | CSS | The unlayered `p` rule in `globals.css` overrides Tailwind's size and line-height utilities, so `text-xl` on a paragraph renders at 16 px. | 1 |
@@ -92,8 +91,7 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 31 | medium   | Home | No call to action to Contact, and the two services don't link anywhere (§5). | 2 |
 | 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
-| 4  | low      | Config | `next.config.ts` uses `module.exports` and the deprecated `images.domains`. | 0 |
-| 5  | low      | Config | `@netlify/plugin-nextjs` is installed but unused: hosting is Vercel. `README.md` is the create-next-app default. | 0 |
+| 5  | low      | Config | `README.md` is the create-next-app default. | 0 |
 | 28 | low      | Logging | The API logs the whole mail error object, which can include email addresses (§9). | 0 |
 | 7  | low      | CSS | System dark mode changes the `body` colors, but pages are designed light only. Most elements set their own colors, which hides it. | 1 |
 | 9  | low      | Animation | `animate-fade-in` is used but not defined, so nothing fades. | 1 |
