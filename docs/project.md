@@ -72,7 +72,7 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 14 | high     | Images | Hero and portrait are Unsplash placeholders; the portrait is an anonymous silhouette labelled as María, and the hero source is only 800 px wide. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
+| 14 | high     | Images | The hero is a marked local placeholder (`public/images/hero/`). The portrait is an Unsplash placeholder: an anonymous silhouette labelled as María. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
 | 15 | high     | Links | Instagram and WhatsApp point to `#`. Both Live art buttons do nothing. | 2 |
 | 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
@@ -81,7 +81,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
 | 13 | medium   | Contrast | FAQ answers are soft rose `#b18a8b` on white (3.05:1); body text needs 4.5:1. The rest of this row was fixed in Phase 1. | 2 |
 | 30 | medium   | FAQ | FAQ buttons have no visible focus style and no `aria-controls`. Answers are missing from the HTML, so they can't be read without JavaScript. | 2 |
-| 31 | medium   | Home | No call to action to Contact, and the two services don't link anywhere (§5). | 2 |
 | 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
 | 33 | low      | Performance | The whole Contact page is a client component (§8). | 2 |
@@ -104,7 +103,7 @@ No new pages. We improve the four that exist.
 
 | Page          | Content                                                                                      | Done when                                                       |
 | ------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Home**      | Hero, intro, "¿Qué ofrecemos?" (stationery and live art), call to action to Contact           | The offer is clear on a phone; both services link onward        |
+| **Home**      | Hero, intro, "¿Qué ofrecemos?" (stationery links to Contact, live art to Live art; owner decision, 2026-11-26), call to action to Contact | The offer is clear on a phone; both services link onward        |
 | **Live art**  | Service text, "¿Cómo trabajamos?" steps on the same page, "¿Hablamos?"                       | Both buttons work                                               |
 | **About us**  | María's portrait, story and signature                                                        | Real portrait; long text is comfortable to read                 |
 | **Contact**   | Intro, form (§6), business email link, FAQ                                                   | §6 passes; FAQ opens and closes by keyboard                     |
