@@ -1,70 +1,85 @@
-import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+/** `POST /api/contact`. The steps are those of docs/project.md §6.2. */
+import {
+  contactSchema,
+  isHoneypotFilled,
+  type ContactErrorCode,
+  type ContactResponse,
+} from '@/lib/contact';
+import { EmailError, sendConfirmation, sendNotification } from '@/lib/email';
+import { readBody } from './read-body';
 
-// To use this, set the following variables in your .env.local file:
-// SMTP_HOST=smtp.example.com
-// SMTP_PORT=465
-// SMTP_USER=your_smtp_username
-// SMTP_PASS=your_smtp_password
-// CONTACT_TO_EMAIL=the address that receives the messages
-// (For Gmail, you may need an App Password and use smtp.gmail.com)
+const ERRORS: Record<ContactErrorCode, { status: number; message: string }> = {
+  invalid_request: { status: 400, message: 'La solicitud no es válida.' },
+  invalid_input: { status: 400, message: 'Revisa los datos del formulario.' },
+  send_failed: { status: 502, message: 'No se pudo enviar el mensaje.' },
+};
 
-function sendFailed() {
-  return NextResponse.json(
-    { success: false, error: 'No se pudo enviar el mensaje.' },
-    { status: 500 }
-  );
+function success() {
+  return Response.json({ ok: true } satisfies ContactResponse);
 }
 
-// Mail errors carry addresses and server replies, so only a code or name is logged.
-function errorLabel(error: unknown): string {
-  if (!(error instanceof Error)) return 'unknown error';
-  return 'code' in error && typeof error.code === 'string'
-    ? error.code
-    : error.name;
+function failure(code: ContactErrorCode) {
+  const { status, message } = ERRORS[code];
+  return Response.json({ error: { code, message } } satisfies ContactResponse, {
+    status,
+  });
 }
 
-export async function POST(req: NextRequest) {
-  // An uncaught parse error would put part of the visitor's text in the logs.
-  const body = await req.json().catch(() => null);
-  if (body === null) return sendFailed();
+/**
+ * Only JSON is accepted. A page on another site cannot send that content type
+ * without a CORS preflight, which this route does not allow.
+ */
+function isJson(request: Request): boolean {
+  const mediaType = request.headers.get('content-type')?.split(';')[0];
+  return mediaType?.trim().toLowerCase() === 'application/json';
+}
 
-  const { message } = body;
+/** The body's JSON object, or `null` for anything else. */
+async function parseBody(request: Request): Promise<object | null> {
+  if (!isJson(request)) return null;
 
-  if (!message || typeof message !== 'string' || !message.trim()) {
-    return NextResponse.json(
-      { success: false, error: 'Mensaje vacío.' },
-      { status: 400 }
-    );
+  const text = await readBody(request);
+  if (text === null) return null;
+
+  try {
+    const value: unknown = JSON.parse(text);
+    return typeof value === 'object' && !Array.isArray(value) ? value : null;
+  } catch {
+    // Not logged: a parse error quotes the visitor's text.
+    return null;
   }
+}
 
-  const recipient = process.env.CONTACT_TO_EMAIL;
-  if (!recipient) {
-    console.error('Contact email not sent: CONTACT_TO_EMAIL is not set.');
-    return sendFailed();
+/** Safe to log: the code and status only, never the error or its message. */
+function errorLabel(error: unknown): string {
+  if (!(error instanceof EmailError)) return 'unknown';
+  return error.status ? `${error.code} ${error.status}` : error.code;
+}
+
+export async function POST(request: Request) {
+  const body = await parseBody(request);
+  if (!body) return failure('invalid_request');
+
+  // A bot gets the same answer as a real send.
+  if (isHoneypotFilled(body)) return success();
+
+  const parsed = contactSchema.safeParse(body);
+  if (!parsed.success) return failure('invalid_input');
+  const { name, email, message } = parsed.data;
+
+  try {
+    await sendNotification({ name, email, message });
+  } catch (error) {
+    console.error('Contact notification not sent:', errorLabel(error));
+    return failure('send_failed');
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 465,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `Web Contact <${process.env.SMTP_USER}>`,
-      to: recipient,
-      subject: 'Nuevo mensaje de contacto desde Haperd.com',
-      text: message,
-    });
-
-    return NextResponse.json({ success: true });
+    await sendConfirmation(email);
   } catch (error) {
-    console.error('Error sending contact email:', errorLabel(error));
-    return sendFailed();
+    // The owner has the enquiry, so the visitor still gets a success.
+    console.error('Contact confirmation not sent:', errorLabel(error));
   }
+
+  return success();
 }

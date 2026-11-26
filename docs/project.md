@@ -62,7 +62,7 @@ Checked on 2026-11-26, at commit `4ff5069`: Phase 0 done. `pnpm lint`, `pnpm typ
 | `/live-art`    | `src/app/live-art/page.tsx`    | Live art service text, sample work steps, links     |
 | `/about-us`    | `src/app/about-us/page.tsx`    | María's story with a portrait                       |
 | `/contact`     | `src/app/contact/page.tsx`     | Intro, message box, three FAQs                      |
-| `/api/contact` | `src/app/api/contact/route.ts` | Sends the message over SMTP with `nodemailer`       |
+| `/api/contact` | `src/app/api/contact/route.ts` | Validates the enquiry and sends both emails (§6.2)  |
 
 Shared components in `src/components`: `Header`, `SkipLink`, `Navbar`, `MobileMenu` (with `MobileMenuToggle` and `NavLink`), `Footer`, `ContactForm`, `FAQCollapse`, and the base components in `ui/`. Nav items, FAQ and site constants are in `src/content`.
 
@@ -76,7 +76,7 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 15 | high     | Links | The WhatsApp number has not arrived, so the footer shows no WhatsApp link. | 2 |
 | 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
-| 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
+| 18 | high     | Contact API | `/api/contact` has no rate limit. | 5 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
 | 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
@@ -261,7 +261,7 @@ docs/
 | `CONTACT_TO_EMAIL`     | Server  | No      | Where enquiries arrive                        |
 | `NEXT_PUBLIC_SITE_URL` | Both    | Yes     | Canonical URL, used by metadata and sitemap   |
 
-`.env.example` lists every variable with no values. Local values go in `.env.local`. The old `SMTP_*` variables are removed in Phase 3.
+`.env.example` lists every variable with no values. Local values go in `.env.local`.
 
 ---
 
