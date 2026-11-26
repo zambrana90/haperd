@@ -138,3 +138,68 @@
     line-height: 1.75;
   }
 }
+
+/*
+ * Reveal on scroll, for content below the first screen. It finishes once 6rem of
+ * the element has entered the viewport. Without scroll-driven animations the
+ * content is simply there. Never put it on the main image, on an anchor target,
+ * or on an element that moves on hover (the animation would override that).
+ */
+@utility reveal {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) and (animation-range: entry) {
+      animation: reveal 1ms linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 6rem;
+
+      /* Keyboard focus never lands on faded content. */
+      &:focus-within {
+        animation: none;
+      }
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+}
+
+/* Page transitions (components/PageTransition.tsx). */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(.page) {
+    animation: page-out var(--transition-duration-fast) var(--ease-gentle) both;
+  }
+
+  ::view-transition-new(.page) {
+    animation: page-in var(--transition-duration-base) var(--ease-enter) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Clicks reach the page while a transition runs. */
+::view-transition {
+  pointer-events: none;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    translate: 0 0.5rem;
+  }
+}
