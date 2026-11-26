@@ -1,3 +1,4 @@
+import { PhoneFrame } from '@/components/contact/PhoneFrame';
 import { ContactForm } from '@/components/ContactForm';
 import { FAQCollapse } from '@/components/FAQCollapse';
 import { Footer } from '@/components/Footer';
@@ -60,7 +61,10 @@ export default function Contact() {
                 lleven a casa.
               </p>
             </div>
-            <ContactForm />
+            <PhoneFrame>
+              {/* The frame is the card on desktop. The larger scroll margin keeps its top in view. */}
+              <ContactForm className='lg:flex-1 lg:scroll-mt-16 lg:bg-transparent lg:shadow-none' />
+            </PhoneFrame>
           </Container>
 
           <Section

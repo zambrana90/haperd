@@ -125,7 +125,8 @@ export function ContactForm({ className }: { className?: string }) {
         multiline
         label='Mensaje'
         placeholder='Tu mensaje...'
-        className='min-h-40'
+        // In the desktop phone frame a long message grows the field, not a scrollbar.
+        className='min-h-40 lg:basis-auto lg:field-sizing-content'
       />
       {/* Honeypot: people never see or reach it, simple bots fill it in. */}
       <div aria-hidden='true' className='sr-only'>
