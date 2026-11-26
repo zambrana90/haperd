@@ -7,6 +7,7 @@ import { Heading } from '@/components/ui/Heading';
 import { Lead } from '@/components/ui/Lead';
 import { Section } from '@/components/ui/Section';
 import { FAQ_ITEMS } from '@/content/faq';
+import { SITE } from '@/content/site';
 
 export default function Contact() {
   return (
@@ -39,10 +40,10 @@ export default function Contact() {
               <br />
               Genial. Escríbenos directamente a{' '}
               <a
-                href='mailto:hola@haperd.com'
+                href={`mailto:${SITE.email}`}
                 className='rounded-field font-semibold underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy'
               >
-                hola@haperd.com
+                {SITE.email}
               </a>{' '}
               contándonos un poquito sobre la idea y te preparamos una propuesta
               a medida.

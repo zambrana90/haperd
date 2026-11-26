@@ -61,10 +61,10 @@ Checked on 2026-11-26, at commit `4ff5069`: Phase 0 done. `pnpm lint`, `pnpm typ
 | `/`            | `src/app/page.tsx`             | Hero header, intro text, "¿Qué ofrecemos?"          |
 | `/live-art`    | `src/app/live-art/page.tsx`    | Live art service text, sample work steps, links     |
 | `/about-us`    | `src/app/about-us/page.tsx`    | María's story with a portrait                       |
-| `/contact`     | `src/app/contact/page.tsx`     | Intro, message box, three FAQs                      |
+| `/contact`     | `src/app/contact/page.tsx`     | Intro, contact form, three FAQs                     |
 | `/api/contact` | `src/app/api/contact/route.ts` | Validates the enquiry and sends both emails (§6.2)  |
 
-Shared components in `src/components`: `Header`, `SkipLink`, `Navbar`, `MobileMenu` (with `MobileMenuToggle` and `NavLink`), `Footer`, `ContactForm`, `FAQCollapse`, and the base components in `ui/`. Nav items, FAQ and site constants are in `src/content`.
+Shared components in `src/components`: `Header`, `SkipLink`, `Navbar`, `MobileMenu` (with `MobileMenuToggle` and `NavLink`), `Footer`, `ContactForm`, `FAQCollapse`, the form's parts in `contact/`, and the base components in `ui/`. Nav items, FAQ and site constants are in `src/content`.
 
 ### Known problems
 
@@ -74,12 +74,9 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | -- | -------- | ---- | ------- | ----- |
 | 14 | high     | Images | The portrait (`public/images/about-us/`) is a marked local placeholder, and there is no logo or final favicon. The hero photo is 1080 px square, so wide screens upscale it. | 2 |
 | 15 | high     | Links | The WhatsApp number has not arrived, so the footer shows no WhatsApp link. | 2 |
-| 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
-| 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
 | 18 | high     | Contact API | `/api/contact` has no rate limit. | 5 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
-| 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
 | 19 | low      | Errors | `error.tsx` is unstyled and in English. There is no `not-found.tsx`, so the 404 page is the English default. | 4 |
 
@@ -131,6 +128,8 @@ No new pages. We improve the four that exist.
 | Sending | Button disabled, "Enviando..."                                                    |
 | Sent    | Clear confirmation; form cleared                                                  |
 | Failed  | Friendly error with the business email as a fallback; **keep what the user typed** |
+
+**Privacy note** (owner decision, 2026-11-26): a short note by the form says that name, email and message are used to answer the enquiry and are sent by email through Brevo. No legal claims, retention periods or promises.
 
 ### 6.2 API
 
@@ -274,9 +273,8 @@ The owner answers these. Delete a row once answered, and write the answer where 
 | 1  | Missing images: María's portrait, logo or favicon, a larger hero (if there is one)                           | Phase 2   |
 | 2  | WhatsApp number                                                                                              | Phase 2   |
 | 3  | The "¿Cómo trabajamos?" steps                                                                                | Phase 2   |
-| 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 3   |
-| 6  | Is `haperd.com` registered, and is `hola@haperd.com` a working inbox?                                        | Phase 3   |
-| 7  | Privacy notice: the form collects personal data, which usually requires one under GDPR. What text, and where? | Phase 3   |
+| 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 5   |
+| 6  | Is `haperd.com` registered? `hola@haperd.com` is not set up yet (owner, 2026-11-26); it must work before launch. | Phase 5   |
 | 8  | Vercel plan: the free Hobby plan is for non-commercial use. Pay for Pro, or reconsider hosting?              | Phase 5   |
 
 ---
