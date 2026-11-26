@@ -62,7 +62,7 @@ Checked on 2026-11-26, at commit `4ff5069`: Phase 0 done. `pnpm lint`, `pnpm typ
 | `/live-art`    | `src/app/live-art/page.tsx`    | Live art service text, sample work steps, links     |
 | `/about-us`    | `src/app/about-us/page.tsx`    | María's story with a portrait                       |
 | `/contact`     | `src/app/contact/page.tsx`     | Intro, contact form, three FAQs                     |
-| `/api/contact` | `src/app/api/contact/route.ts` | Sends the message over SMTP with `nodemailer`       |
+| `/api/contact` | `src/app/api/contact/route.ts` | Validates the enquiry and sends both emails (§6.2)  |
 
 Shared components in `src/components`: `Header`, `SkipLink`, `Navbar`, `MobileMenu` (with `MobileMenuToggle` and `NavLink`), `Footer`, `ContactForm`, `FAQCollapse`, the form's parts in `contact/`, and the base components in `ui/`. Nav items, FAQ and site constants are in `src/content`.
 
@@ -72,9 +72,9 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 14 | high     | Images | The hero (`public/images/hero/`), the portrait (`public/images/about-us/`) and the Live art painting (`public/images/live-art/`) are marked local placeholders. | 2 |
+| 14 | high     | Images | The portrait (`public/images/about-us/`) is a marked local placeholder, and there is no logo or final favicon. The hero photo is 1080 px square, so wide screens upscale it. | 2 |
 | 15 | high     | Links | The WhatsApp number has not arrived, so the footer shows no WhatsApp link. | 2 |
-| 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
+| 18 | high     | Contact API | `/api/contact` has no rate limit. | 5 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
@@ -97,7 +97,7 @@ No new pages. We improve the four that exist.
 
 | Page          | Content                                                                                      | Done when                                                       |
 | ------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Home**      | Hero, intro, "¿Qué ofrecemos?" (stationery links to Contact, live art to Live art; owner decision, 2026-11-26), call to action to Contact | The offer is clear on a phone; both services link onward        |
+| **Home**      | Hero, intro, "¿Qué ofrecemos?" with three services: wedding stationery and personalised illustration (both link to Contact) and Live art (links to Live art); owner decisions, 2026-11-26. Call to action to Contact | The offer is clear on a phone; every service links onward       |
 | **Live art**  | Service text, "¿Cómo trabajamos?" steps on the same page, "¿Hablamos?"                       | Both buttons work                                               |
 | **About us**  | María's portrait, story and signature                                                        | Real portrait; long text is comfortable to read                 |
 | **Contact**   | Intro, form (§6), business email link, FAQ                                                   | §6 passes; FAQ opens and closes by keyboard                     |
@@ -260,7 +260,7 @@ docs/
 | `CONTACT_TO_EMAIL`     | Server  | No      | Where enquiries arrive                        |
 | `NEXT_PUBLIC_SITE_URL` | Both    | Yes     | Canonical URL, used by metadata and sitemap   |
 
-`.env.example` lists every variable with no values. Local values go in `.env.local`. The old `SMTP_*` variables are removed in Phase 3.
+`.env.example` lists every variable with no values. Local values go in `.env.local`.
 
 ---
 
@@ -270,7 +270,7 @@ The owner answers these. Delete a row once answered, and write the answer where 
 
 | #  | Question                                                                                                     | Needed by |
 | -- | ------------------------------------------------------------------------------------------------------------ | --------- |
-| 1  | Real images: hero artwork, María's portrait, live art photos, logo or favicon                                | Phase 2   |
+| 1  | Missing images: María's portrait, logo or favicon, a larger hero (if there is one)                           | Phase 2   |
 | 2  | WhatsApp number                                                                                              | Phase 2   |
 | 3  | The "¿Cómo trabajamos?" steps                                                                                | Phase 2   |
 | 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 5   |

@@ -1,3 +1,11 @@
+/** Shown on the Live art page and on its Home card. */
+export const LIVE_ART_PHOTO = {
+  src: '/images/live-art/guest-portrait.jpg',
+  alt: 'Dibujo de una persona con traje naranja junto a una flor roja',
+  width: 640,
+  height: 640,
+};
+
 export type Step = {
   title: string;
   description: string;

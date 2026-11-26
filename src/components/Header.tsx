@@ -15,22 +15,24 @@ export function Header({ variant = 'large' }: HeaderProps) {
 /** Over a background image. */
 function LargeHeader() {
   return (
-    <header className='relative flex min-h-65 w-full flex-col sm:min-h-95 md:min-h-137.5'>
+    <header className='relative flex min-h-90 w-full bg-navy flex-col sm:min-h-125 md:min-h-160 lg:min-h-180'>
       <SkipLink />
       {/*
-        TODO(owner): placeholder until the hero artwork arrives (project.md §12).
-        `sizes` is the rendered width: at the header's minimum heights (260, 380
-        and 550px), object-cover makes this 2400×1100 image wider than a narrow
-        screen. Update it if the artwork has another aspect ratio.
+        A square 1080px photo, cropped by object-cover. The header heights and
+        object positions keep the hands and the drawing in view, mostly below
+        the brand card and the nav bar. Check them if either changes. It is
+        never drawn wider than the file; wider screens fade its sides into navy.
       */}
-      <Image
-        src='/images/hero/hero-placeholder.jpg'
-        alt=''
-        fill
-        sizes='(max-width: 639px) 570px, (max-width: 767px) 830px, (max-width: 1199px) 1200px, 100vw'
-        preload
-        className='object-cover object-center'
-      />
+      <div className='absolute inset-0 mx-auto max-w-270 min-[67.5rem]:mask-x-from-85%'>
+        <Image
+          src='/images/hero/live-art-drawing.jpg'
+          alt=''
+          fill
+          sizes='(min-width: 1080px) 1080px, (max-width: 359px) 360px, 100vw'
+          preload
+          className='object-cover object-[50%_20%] md:object-[50%_25%] lg:object-[50%_16%]'
+        />
+      </div>
       <HeaderContent>
         {/* A solid card keeps the text readable over any image. */}
         <Brand

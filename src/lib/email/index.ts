@@ -5,6 +5,7 @@
  * Both functions resolve once Brevo accepts the email and throw an `EmailError`
  * otherwise. Nothing here logs.
  */
+import 'server-only';
 import { readConfig, sendEmail } from './brevo';
 import {
   confirmationTemplate,
