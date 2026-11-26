@@ -31,6 +31,7 @@ function LargeHeader() {
           fill
           sizes='(min-width: 1080px) 1080px, (max-width: 359px) 360px, 100vw'
           preload
+          fetchPriority='high'
           className='object-cover object-[50%_20%] motion-safe:animate-hero-settle md:object-[50%_25%] lg:object-[50%_16%]'
         />
       </div>
