@@ -52,7 +52,7 @@ When this works end to end on a phone and a desktop, the product is done.
 
 ## 4. Current state
 
-Checked on 2026-11-26, at commit `876cc58`. Updated for the Next.js 16 upgrade: `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6. The only tests cover the security headers.
+Checked on 2026-11-26, at commit `876cc58`. Updated for the Next.js 16 upgrade: `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6. Tests cover the security headers and the contact route.
 
 ### What exists
 
@@ -72,7 +72,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 24 | high     | Privacy | A personal email address is hardcoded as the recipient in `src/app/api/contact/route.ts` (since `c1bd7b3`), in a public repo. Remove it from the code. It stays in the git history by owner decision (2026-11-26). | 0 |
 | 13 | high     | Contrast | White on the rose `#bd8a87` is 2.9:1, `#b18a8b` on white is 3.05:1, and the large "Haperd" and "Live art" headings on rose are 1.3:1. Body text needs 4.5:1, large text 3:1. The header tagline over the photo is hard to read. | 1 |
 | 14 | high     | Images | Hero and portrait are Unsplash placeholders; the portrait is an anonymous silhouette labelled as María, and the hero source is only 800 px wide. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
 | 15 | high     | Links | Instagram and WhatsApp point to `#`. Both Live art buttons do nothing. | 2 |
@@ -81,7 +80,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
-| 27 | medium   | Errors | `error.tsx` shows the raw error message to visitors (§9) and logs the error in the browser console. | 0 |
 | 6  | medium   | CSS | The unlayered `p` rule in `globals.css` overrides Tailwind's size and line-height utilities, so `text-xl` on a paragraph renders at 16 px. | 1 |
 | 8  | medium   | Fonts | `Quicksand` and `Dancing Script` are referenced but never loaded, so a fallback shows. `body` is set to Arial. | 1 |
 | 10 | medium   | Header | Offsets such as `mr-64` misplace the subtitle on narrow screens. `/`, `/live-art` and `/about-us` scroll horizontally by 1 px at 375 px (48 px at 320 px). The whole header is a client component. | 1 |
@@ -92,7 +90,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
 | 5  | low      | Config | `README.md` is the create-next-app default. | 0 |
-| 28 | low      | Logging | The API logs the whole mail error object, which can include email addresses (§9). | 0 |
 | 7  | low      | CSS | System dark mode changes the `body` colors, but pages are designed light only. Most elements set their own colors, which hides it. | 1 |
 | 9  | low      | Animation | `animate-fade-in` is used but not defined, so nothing fades. | 1 |
 | 32 | low      | Footer | No link to Contact (§5), the year is hardcoded as 2025, and the icon links are 36 px (the menu button is 40 × 30 px). | 1 |
