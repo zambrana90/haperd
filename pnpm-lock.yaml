@@ -21,9 +21,6 @@ importers:
         specifier: ^19.3.1
         version: 19.3.1(react@19.3.1)
     devDependencies:
-      '@netlify/plugin-nextjs':
-        specifier: ^5.10.7
-        version: 5.16.9
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.3.5
@@ -388,10 +385,6 @@ packages:
     peerDependencies:
       '@emnapi/core': ^1.7.1 || 2.0.0-beta.2
       '@emnapi/runtime': ^1.7.1 || 2.0.0-beta.2
-
-  '@netlify/plugin-nextjs@5.16.9':
-    resolution: {integrity: sha512-mGGT5FkuMaVHG9F3HFmhcI3cFKtzGlff5NwewEUimi2mHDGlSqpBAXWxwZxkt25nbkT1box5t+0tZ8/u5UWUww==}
-    engines: {node: '>=18.0.0'}
 
   '@next/env@16.4.6':
     resolution: {integrity: sha512-SunBjJ6t+oBtecS3dTjdVuMhUogP5wD/vrGL5EVuQYM1iS4O5ilL51HkiJ3sPjMzRHiCChvr4dbaSJbR7F3lxA==}
@@ -2644,8 +2637,6 @@ snapshots:
       '@emnapi/runtime': 2.0.0-beta.2
       '@tybys/wasm-util': 0.10.5
     optional: true
-
-  '@netlify/plugin-nextjs@5.16.9': {}
 
   '@next/env@16.4.6': {}
 

@@ -1,11 +1,16 @@
 import type { NextConfig } from "next";
+import { securityHeaders } from "./src/lib/security-headers";
 
 const nextConfig: NextConfig = {
   // Stops `next dev` from generating AGENTS.md; agent rules live in CLAUDE.md.
   agentRules: false,
+  poweredByHeader: false,
   images: {
-    domains: ['images.unsplash.com'],
+    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+  },
+  headers() {
+    return [{ source: "/:path*", headers: securityHeaders }];
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
