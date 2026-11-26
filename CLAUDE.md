@@ -85,5 +85,3 @@ A portfolio website for a wedding stationery and live illustration studio. Next.
 | `pnpm lint`      | Lint             |
 | `pnpm typecheck` | Type check       |
 | `pnpm test`      | Tests            |
-
-`typecheck` and `test` don't exist until Phase 0 adds them. Phase 0 also replaces `next lint`.

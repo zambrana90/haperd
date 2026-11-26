@@ -89,7 +89,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 31 | medium   | Home | No call to action to Contact, and the two services don't link anywhere (§5). | 2 |
 | 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
-| 5  | low      | Config | `README.md` is the create-next-app default. | 0 |
 | 7  | low      | CSS | System dark mode changes the `body` colors, but pages are designed light only. Most elements set their own colors, which hides it. | 1 |
 | 9  | low      | Animation | `animate-fade-in` is used but not defined, so nothing fades. | 1 |
 | 32 | low      | Footer | No link to Contact (§5), the year is hardcoded as 2025, and the icon links are 36 px (the menu button is 40 × 30 px). | 1 |
