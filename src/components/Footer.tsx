@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { SITE } from '@/content/site';
+import { cx, LINK_FEEDBACK } from './ui/variants';
 
-const LINK_CLASSES =
-  'flex min-h-11 min-w-11 items-center justify-center rounded-field focus-visible:outline-2 focus-visible:outline-navy';
+const LINK_CLASSES = cx(
+  'flex min-h-11 min-w-11 items-center justify-center rounded-field focus-visible:outline-2 focus-visible:outline-navy',
+  LINK_FEEDBACK,
+);
 
 export function Footer() {
   // Pages are static, so this is the year of the latest deployment.
@@ -18,7 +21,7 @@ export function Footer() {
         <div className='flex flex-wrap items-center justify-center gap-3'>
           <Link
             href='/contact'
-            className={`${LINK_CLASSES} px-3 underline underline-offset-4 hover:no-underline`}
+            className={`${LINK_CLASSES} px-3 underline underline-offset-4 hover:decoration-transparent`}
           >
             Contacto
           </Link>
@@ -67,7 +70,7 @@ function SocialLink({ href, label, children }: SocialLinkProps) {
       target='_blank'
       rel='noopener noreferrer'
       aria-label={label}
-      className={`${LINK_CLASSES} transition-[translate] duration-fast ease-gentle motion-safe:hover:-translate-y-0.5`}
+      className={LINK_CLASSES}
     >
       <svg aria-hidden='true' viewBox='0 0 36 36' fill='none' className='size-9'>
         {children}

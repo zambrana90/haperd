@@ -6,8 +6,12 @@ import type { FaqItem } from '@/content/faq';
  */
 export function FAQCollapse({ question, answer }: FaqItem) {
   return (
-    <details className='group rounded-field border border-rose-soft bg-white'>
-      <summary className='flex min-h-12 cursor-pointer list-none items-center gap-3 rounded-field p-4 text-lg font-semibold text-ink hover:bg-blush focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy [&::-webkit-details-marker]:hidden'>
+    // The answer's height and opacity ease both ways. Browsers without
+    // `::details-content` or `interpolate-size` open and close instantly.
+    // `allow-discrete` is for `content-visibility` only, so a height that cannot
+    // be interpolated changes at once.
+    <details className='group rounded-field border border-rose-soft bg-white motion-safe:[interpolate-size:allow-keywords] motion-safe:details-content:h-0 motion-safe:details-content:overflow-clip motion-safe:details-content:opacity-0 motion-safe:details-content:transition-[height,opacity,content-visibility] motion-safe:details-content:[transition-behavior:normal,normal,allow-discrete] motion-safe:details-content:duration-base motion-safe:details-content:ease-gentle motion-safe:open:details-content:h-auto motion-safe:open:details-content:opacity-100'>
+      <summary className='flex min-h-12 cursor-pointer list-none items-center gap-3 rounded-field p-4 text-lg font-semibold text-ink transition-colors duration-fast ease-gentle hover:bg-blush focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy [&::-webkit-details-marker]:hidden'>
         <svg
           aria-hidden='true'
           viewBox='0 0 16 16'
