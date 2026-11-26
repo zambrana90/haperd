@@ -72,12 +72,11 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 14 | high     | Images | The portrait (`public/images/about-us/`) is a marked local placeholder, and there is no logo. The hero photo is 1080 px square, so wide screens upscale it. | 2 |
+| 14 | high     | Images | The portrait (`public/images/about-us/`) is a marked local placeholder, and there is no logo or final favicon (the current icon is a temporary key-like mark with its lower end clipped). The hero photo is 1080 px square, so wide screens upscale it. | 2 |
 | 15 | high     | Links | The WhatsApp number has not arrived, so the footer shows no WhatsApp link. | 2 |
 | 18 | high     | Contact API | `/api/contact` has no rate limit. | 5 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
-| 19 | low      | Errors | `error.tsx` is unstyled and in English. There is no `not-found.tsx`, so the 404 page is the English default. | 4 |
 
 ---
 
@@ -269,7 +268,7 @@ The owner answers these. Delete a row once answered, and write the answer where 
 
 | #  | Question                                                                                                     | Needed by |
 | -- | ------------------------------------------------------------------------------------------------------------ | --------- |
-| 1  | Missing images: María's portrait, logo, a larger hero (if there is one)                                      | Phase 2   |
+| 1  | Missing images: María's portrait, logo, final favicon (the current one is a temporary key-like mark, lower end clipped), a larger hero (if there is one) | Phase 2   |
 | 2  | WhatsApp number                                                                                              | Phase 2   |
 | 3  | The "¿Cómo trabajamos?" steps                                                                                | Phase 2   |
 | 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 5   |
