@@ -1,10 +1,13 @@
-export const PORTRAIT = {
-  // TODO(Phase 2): replace with María's real portrait from the owner, and
-  // rewrite the alt text to describe it.
-  src: '/images/about-us/portrait-placeholder.jpg',
-  alt: 'Imagen provisional en lugar de un retrato',
-  width: 800,
-  height: 1000,
+/**
+ * A temporary photo of the studio's work (owner decision, 2026-11-26).
+ * TODO: replace with María's real portrait from the owner, put it in
+ * `public/images/about-us/`, and rewrite the alt text to describe it.
+ */
+export const PHOTO = {
+  src: '/images/home/stationery-invitation.jpg',
+  alt: 'Invitación de boda con monograma sobre un sobre de papel kraft, junto a ramas de olivo, una cinta de seda y una tarjeta ilustrada',
+  width: 640,
+  height: 640,
 } as const;
 
 export const INTRO = 'La mente (y el pincel) detrás de Haperd&Co.';

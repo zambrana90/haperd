@@ -62,7 +62,7 @@ Phase 4 check on 2026-11-26, after commit `a756988`, on all four pages: Lighthou
 | -------------- | ------------------------------ | --------------------------------------------------- |
 | `/`            | `src/app/page.tsx`             | Hero header, intro text, "¿Qué ofrecemos?"          |
 | `/live-art`    | `src/app/live-art/page.tsx`    | Live art service text, sample work steps, links     |
-| `/about-us`    | `src/app/about-us/page.tsx`    | María's story with a portrait                       |
+| `/about-us`    | `src/app/about-us/page.tsx`    | María's story with a temporary photo                |
 | `/contact`     | `src/app/contact/page.tsx`     | Intro, contact form, three FAQs                     |
 | `/api/contact` | `src/app/api/contact/route.ts` | Validates the enquiry and sends both emails (§6.2)  |
 
@@ -74,7 +74,7 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 14 | high     | Images | The portrait (`public/images/about-us/`) is a marked local placeholder, and there is no logo or final favicon (the current icon is a temporary key-like mark with its lower end clipped). The hero photo is 1080 px square, so wide screens upscale it. | 2 |
+| 14 | high     | Images | María's portrait is missing: About us shows a temporary photo of the studio's work (`public/images/home/stationery-invitation.jpg`, owner decision 2026-11-26). There is no logo or final favicon (the current icon is a temporary key-like mark with its lower end clipped). The hero photo is 1080 px square, so wide screens upscale it. | 2 |
 | 15 | high     | Links | The WhatsApp number has not arrived, so the footer shows no WhatsApp link. | 2 |
 | 18 | high     | Contact API | `/api/contact` has no rate limit. | 5 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
@@ -99,10 +99,10 @@ No new pages. We improve the four that exist.
 
 | Page          | Content                                                                                      | Done when                                                       |
 | ------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Home**      | Hero, intro, "¿Qué ofrecemos?" with three services: wedding stationery and personalised illustration (both link to Contact) and Live art (links to Live art); owner decisions, 2026-11-26. The services are zigzag rows (owner decision, 2026-11-26). Call to action to Contact | The offer is clear on a phone; every service links onward       |
+| **Home**      | Hero, intro, "¿Qué ofrecemos?" with three services: wedding stationery and personalised illustration (both link to Contact) and Live art (links to Live art); owner decisions, 2026-11-26. The services are zigzag rows (owner decision, 2026-11-26). The page title (`h1`) is the slogan "No hacemos papelería, creamos momentos.", with no second brand title (owner decision, 2026-11-26). Call to action to Contact | The offer is clear on a phone; every service links onward       |
 | **Live art**  | Service text, "¿Cómo trabajamos?" steps on the same page, "¿Hablamos?"                       | Both buttons work                                               |
-| **About us**  | María's portrait, story and signature                                                        | Real portrait; long text is comfortable to read                 |
-| **Contact**   | Large image header, as on the other pages (owner decision, 2026-11-26). Intro, form (§6), business email link, FAQ | §6 passes; FAQ opens and closes by keyboard                     |
+| **About us**  | María's portrait, story and signature, in an intro card overlapping the large header as on Live art, mirrored: photo left and story right on desktop, one column on phones (owner decision, 2026-11-26). Until the portrait arrives, a photo of the studio's work stands in (owner decision, 2026-11-26) | Real portrait; long text is comfortable to read                 |
+| **Contact**   | Large image header, as on the other pages (owner decision, 2026-11-26). Intro, form (§6), business email link, FAQ. On desktop only, the form sits in a phone frame (owner decision, 2026-11-26) | §6 passes; FAQ opens and closes by keyboard                     |
 
 **Copy rules**
 
