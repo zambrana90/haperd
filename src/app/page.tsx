@@ -22,16 +22,17 @@ export default function Home() {
         <main id='main' className='flex-1 bg-blush text-ink'>
           {/* The intro card overlaps the hero image. No z-index, so the mobile menu stays on top. */}
           <Container className='relative -mt-8 md:-mt-20'>
-            <div className='grid gap-6 rounded-card bg-off-white p-6 shadow-lifted sm:p-10 lg:grid-cols-[2fr_3fr] lg:gap-12 lg:p-14'>
-              <div>
-                <Heading level={1} className='md:text-8xl'>
-                  Haperd
-                </Heading>
-                <Lead className='mt-4 font-serif text-balance md:text-2xl'>
-                  En Haperd and Co. no hacemos papelería, creamos momentos.
-                </Lead>
-              </div>
-              <Lead className='lg:self-center'>
+            {/* The header already shows the brand, so the slogan is the page title. */}
+            <div className='grid gap-6 rounded-card bg-off-white p-6 shadow-lifted sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:p-14'>
+              {/* Smaller than a one-word title, so the longer slogan keeps whole words per line. */}
+              <Heading
+                level={1}
+                size='title'
+                className='min-[24rem]:text-4xl lg:text-6xl'
+              >
+                No hacemos papelería, creamos momentos.
+              </Heading>
+              <Lead>
                 <span className='font-semibold'>Invitaciones</span> que cuentan
                 historias, <span className='italic'>menús</span> que se leen con
                 una sonrisa y <span className='font-semibold'>detalles</span> que
