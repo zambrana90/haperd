@@ -5,6 +5,8 @@ import {
   Geist_Mono,
   Quicksand,
 } from 'next/font/google';
+import { PAGE_SEO } from '@/content/seo';
+import { getSiteUrl } from '@/lib/seo/site-url';
 import './globals.css';
 
 // The CSS variables are mapped to font tokens in globals.css.
@@ -38,9 +40,11 @@ const dancingScript = Dancing_Script({
   preload: false,
 });
 
+// Each page sets its own metadata. These cover routes that don't, such as 404.
 export const metadata: Metadata = {
-  title: 'Haperd and co.',
-  description: 'Live event illustration',
+  metadataBase: new URL(getSiteUrl()),
+  title: PAGE_SEO.home.title,
+  description: PAGE_SEO.home.description,
 };
 
 export default function RootLayout({
@@ -53,10 +57,6 @@ export default function RootLayout({
       lang='es'
       className={`${fraunces.variable} ${quicksand.variable} ${geistMono.variable} ${dancingScript.variable}`}
     >
-      <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="alternate icon" href="/favicon.ico" type="image/x-icon" />
-      </head>
       <body className='antialiased'>{children}</body>
     </html>
   );

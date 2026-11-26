@@ -6,7 +6,11 @@ import { Container } from '@/components/ui/Container';
 import { Heading } from '@/components/ui/Heading';
 import { Lead } from '@/components/ui/Lead';
 import { Section } from '@/components/ui/Section';
+import { PAGE_SEO } from '@/content/seo';
 import { SERVICES, type Service } from '@/content/home';
+import { pageMetadata } from '@/lib/seo/page-metadata';
+
+export const metadata = pageMetadata(PAGE_SEO.home);
 
 // Rendered widths: the card's inner width, and 80% and 60% of it for a pair.
 const PHOTO_SIZES = {

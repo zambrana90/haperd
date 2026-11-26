@@ -6,7 +6,11 @@ import { Container } from '@/components/ui/Container';
 import { Heading } from '@/components/ui/Heading';
 import { Lead } from '@/components/ui/Lead';
 import { Section } from '@/components/ui/Section';
+import { PAGE_SEO } from '@/content/seo';
 import { LIVE_ART_PHOTO, SAMPLE_STEPS } from '@/content/live-art';
+import { pageMetadata } from '@/lib/seo/page-metadata';
+
+export const metadata = pageMetadata(PAGE_SEO.liveArt);
 
 const STEPS_ID = 'como-trabajamos';
 // The id is on the Contact page's form.
