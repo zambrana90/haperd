@@ -5,7 +5,11 @@ import { Container } from '@/components/ui/Container';
 import { Heading } from '@/components/ui/Heading';
 import { Lead } from '@/components/ui/Lead';
 import { Signature } from '@/components/ui/Signature';
+import { PAGE_SEO } from '@/content/seo';
 import { GREETING, INTRO, PORTRAIT, SIGN_OFF, STORY } from '@/content/about-us';
+import { pageMetadata } from '@/lib/seo/page-metadata';
+
+export const metadata = pageMetadata(PAGE_SEO.aboutUs);
 
 export default function AboutUs() {
   return (
