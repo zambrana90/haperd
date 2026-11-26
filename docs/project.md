@@ -52,7 +52,7 @@ When this works end to end on a phone and a desktop, the product is done.
 
 ## 4. Current state
 
-Checked on 2026-11-26, at commit `876cc58`. With both pnpm and npm, install and build succeed on Next.js 15.3.0, and `pnpm lint` and `tsc --noEmit` pass. Vercel still rejects every deployment (#21). There are no tests.
+Checked on 2026-11-26, at commit `876cc58`. Updated for the Next.js 16 upgrade: `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6. The only test is a smoke test.
 
 ### What exists
 
@@ -72,8 +72,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 1  | critical | Dependencies | `next` 15.3.0 has **critical** advisories, including remote code execution (one path is the image optimizer). `nodemailer` 6.10.1, `sharp` and PostCSS have high ones. `next` needs 15.5.28 or later. | 0 |
-| 21 | critical | Deploy | All Vercel deployments fail with `VULNERABLE_NEXTJS_VERSION`. The build passes; Vercel blocks the output because of Next.js 15.3.0 (#1). | 0 |
 | 24 | high     | Privacy | A personal email address is hardcoded as the recipient in `src/app/api/contact/route.ts` (since `c1bd7b3`), in a public repo. Remove it from the code. It stays in the git history by owner decision (2026-11-26). | 0 |
 | 13 | high     | Contrast | White on the rose `#bd8a87` is 2.9:1, `#b18a8b` on white is 3.05:1, and the large "Haperd" and "Live art" headings on rose are 1.3:1. Body text needs 4.5:1, large text 3:1. The header tagline over the photo is hard to read. | 1 |
 | 14 | high     | Images | Hero and portrait are Unsplash placeholders; the portrait is an anonymous silhouette labelled as María, and the hero source is only 800 px wide. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
@@ -96,8 +94,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
 | 4  | low      | Config | `next.config.ts` uses `module.exports` and the deprecated `images.domains`. | 0 |
 | 5  | low      | Config | `@netlify/plugin-nextjs` is installed but unused: hosting is Vercel. `README.md` is the create-next-app default. | 0 |
-| 22 | low      | Config | `@types/node` is on 20, while `engines` requires Node 26 or later. | 0 |
-| 23 | low      | Dependencies | `pnpm-lock.yaml` pins packages with advisories beyond those in #1, several high: `nanoid` and `source-map-js` in production, and development packages such as `minimatch`, `flatted` and `js-yaml`. A fresh resolution reports none of them. | 0 |
 | 28 | low      | Logging | The API logs the whole mail error object, which can include email addresses (§9). | 0 |
 | 7  | low      | CSS | System dark mode changes the `body` colors, but pages are designed light only. Most elements set their own colors, which hides it. | 1 |
 | 9  | low      | Animation | `animate-fade-in` is used but not defined, so nothing fades. | 1 |
