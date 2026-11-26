@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, type ReactNode } from 'react';
+import { cx, FEEDBACK_TRANSITION, PRESS_FEEDBACK } from './ui/variants';
 
 const PANEL_ID = 'mobile-menu-panel';
 
@@ -61,7 +62,8 @@ export function MobileMenuToggle({ children }: { children: ReactNode }) {
   return (
     <details
       ref={detailsRef}
-      className='group'
+      // Keeps the panel rendered while it animates closed.
+      className='group motion-safe:details-content:transition-[content-visibility] motion-safe:details-content:transition-discrete motion-safe:details-content:duration-base'
       onBlur={(event) => {
         const next = event.relatedTarget;
         if (next && !event.currentTarget.contains(next)) close();
@@ -71,7 +73,11 @@ export function MobileMenuToggle({ children }: { children: ReactNode }) {
         ref={buttonRef}
         aria-label='Abrir menú'
         aria-controls={PANEL_ID}
-        className='relative z-50 flex size-11 cursor-pointer list-none flex-col items-center justify-center gap-1 rounded-field bg-white text-ink shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy [&::-webkit-details-marker]:hidden'
+        className={cx(
+          'relative z-50 flex size-11 cursor-pointer list-none flex-col items-center justify-center gap-1 rounded-field bg-white text-ink shadow-soft hover:bg-blush focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy [&::-webkit-details-marker]:hidden',
+          FEEDBACK_TRANSITION,
+          PRESS_FEEDBACK,
+        )}
       >
         <span className='h-0.5 w-6 bg-current' />
         <span className='h-0.5 w-6 bg-current' />
@@ -87,7 +93,8 @@ export function MobileMenuToggle({ children }: { children: ReactNode }) {
       />
       <div
         id={PANEL_ID}
-        className='absolute top-18 left-0 z-50 w-full animate-fade-in bg-white shadow-lifted'
+        // Fades and slides from the closed state; `starting` covers the first frame.
+        className='absolute top-18 left-0 z-50 w-full bg-white shadow-lifted motion-safe:transition-[opacity,translate] motion-safe:duration-base motion-safe:ease-enter motion-safe:not-group-open:pointer-events-none motion-safe:not-group-open:-translate-y-2 motion-safe:not-group-open:opacity-0 motion-safe:starting:-translate-y-2 motion-safe:starting:opacity-0'
         onClick={(event) => {
           if ((event.target as Element).closest('a')) closeAndRefocus();
         }}

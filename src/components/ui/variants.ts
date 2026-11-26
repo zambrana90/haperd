@@ -3,11 +3,25 @@ export function cx(...classes: Array<string | false | null | undefined>): string
   return classes.filter(Boolean).join(' ');
 }
 
+/**
+ * Hover and press feedback shared by buttons and links. Colors always ease;
+ * movement is only for visitors who allow motion.
+ */
+export const FEEDBACK_TRANSITION =
+  'transition-[color,background-color,border-color,text-decoration-color,translate,scale] duration-fast ease-gentle';
+export const PRESS_FEEDBACK = 'motion-safe:active:scale-97';
+export const LINK_FEEDBACK = cx(
+  FEEDBACK_TRANSITION,
+  'motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0',
+  PRESS_FEEDBACK,
+);
+
 const BUTTON_BASE = cx(
   'inline-flex min-h-12 min-w-12 cursor-pointer items-center justify-center gap-2',
   'rounded-pill border-2 px-6 py-2 text-center font-sans text-base font-semibold',
-  'transition-[color,background-color,translate] duration-fast ease-gentle',
+  FEEDBACK_TRANSITION,
   'motion-safe:not-disabled:hover:-translate-y-0.5',
+  'motion-safe:not-disabled:active:translate-y-0 motion-safe:not-disabled:active:scale-97',
   // Two-tone focus ring, so it shows on both light and dark surfaces.
   'focus-visible:ring-4 focus-visible:ring-white',
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy',

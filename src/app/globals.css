@@ -70,6 +70,29 @@
   --animate-fade-in: fade-in var(--transition-duration-slow) var(--ease-gentle)
     both;
 
+  /*
+   * Hero entrance. Transform only, so the photo and the text are visible from
+   * the first frame. `backwards` leaves no transform behind afterwards. Use with
+   * `motion-safe:`.
+   */
+  --animate-hero-settle: hero-settle 1600ms var(--ease-enter) backwards;
+  --animate-hero-rise: hero-rise var(--transition-duration-slow)
+    var(--ease-enter) backwards;
+  --animate-hero-rise-late: hero-rise var(--transition-duration-slow)
+    var(--ease-enter) var(--transition-duration-fast) backwards;
+
+  @keyframes hero-settle {
+    from {
+      scale: 1.08;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      translate: 0 1rem;
+    }
+  }
+
   @keyframes fade-in {
     from {
       opacity: 0;
