@@ -88,17 +88,17 @@ No new pages. We improve the four that exist.
 
 | Item      | Detail                                                                                          |
 | --------- | ----------------------------------------------------------------------------------------------- |
-| Header    | Brand name and tagline, navigation. Large image variant and compact variant.                    |
+| Header    | Brand name and tagline, navigation. Large image variant on the four pages; compact variant on the 404 and error pages. |
 | Nav       | Haperd (`/`), Live art, About us, Contacto. Current page marked. Mobile: accessible menu. Defined once. |
 | Footer    | Copyright with the current year, Instagram, WhatsApp, link to Contact                           |
 | Done when | Works from 375 px to wide desktop, fully usable by keyboard                                     |
 
 | Page          | Content                                                                                      | Done when                                                       |
 | ------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Home**      | Hero, intro, "¿Qué ofrecemos?" with three services: wedding stationery and personalised illustration (both link to Contact) and Live art (links to Live art); owner decisions, 2026-11-26. Call to action to Contact | The offer is clear on a phone; every service links onward       |
+| **Home**      | Hero, intro, "¿Qué ofrecemos?" with three services: wedding stationery and personalised illustration (both link to Contact) and Live art (links to Live art); owner decisions, 2026-11-26. The services are zigzag rows (owner decision, 2026-11-26). Call to action to Contact | The offer is clear on a phone; every service links onward       |
 | **Live art**  | Service text, "¿Cómo trabajamos?" steps on the same page, "¿Hablamos?"                       | Both buttons work                                               |
 | **About us**  | María's portrait, story and signature                                                        | Real portrait; long text is comfortable to read                 |
-| **Contact**   | Intro, form (§6), business email link, FAQ                                                   | §6 passes; FAQ opens and closes by keyboard                     |
+| **Contact**   | Large image header, as on the other pages (owner decision, 2026-11-26). Intro, form (§6), business email link, FAQ | §6 passes; FAQ opens and closes by keyboard                     |
 
 **Copy rules**
 

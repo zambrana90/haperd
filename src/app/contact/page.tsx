@@ -18,7 +18,7 @@ export default function Contact() {
   return (
     <PageTransition>
       <div className='flex min-h-screen flex-col bg-white'>
-        <Header variant='compact' />
+        <Header variant='large' />
         <main id='main' className='w-full flex-1'>
           <Container className='grid max-w-5xl gap-10 pt-8 pb-section md:pt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16'>
             <div className='text-rose-ink'>
