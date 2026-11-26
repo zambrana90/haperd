@@ -68,13 +68,13 @@ Shared components in `src/components`: `Header`, `Navbar`, `MobileMenu`, `Footer
 
 ### Known problems
 
-From the Phase 0 audit. Each row is assigned to a phase in `plan.md`. Rows are sorted by severity; numbers are stable IDs, so they are not in order. Remove a row when its fix is merged.
+From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the owner accepted it (—). Rows are sorted by severity; numbers are stable IDs, so they are not in order. Remove a row when its fix is merged.
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
 | 1  | critical | Dependencies | `next` 15.3.0 has **critical** advisories, including remote code execution (one path is the image optimizer). `nodemailer` 6.10.1, `sharp` and PostCSS have high ones. `next` needs 15.5.28 or later. | 0 |
 | 21 | critical | Deploy | All Vercel deployments fail with `VULNERABLE_NEXTJS_VERSION`. The build passes; Vercel blocks the output because of Next.js 15.3.0 (#1). | 0 |
-| 24 | high     | Privacy | A personal email address is hardcoded as the recipient in `src/app/api/contact/route.ts` (since `c1bd7b3`), in a public repo. Removing it from the code leaves it in the git history. | 0 |
+| 24 | high     | Privacy | A personal email address is hardcoded as the recipient in `src/app/api/contact/route.ts` (since `c1bd7b3`), in a public repo. Remove it from the code. It stays in the git history by owner decision (2026-11-26). | 0 |
 | 13 | high     | Contrast | White on the rose `#bd8a87` is 2.9:1, `#b18a8b` on white is 3.05:1, and the large "Haperd" and "Live art" headings on rose are 1.3:1. Body text needs 4.5:1, large text 3:1. The header tagline over the photo is hard to read. | 1 |
 | 14 | high     | Images | Hero and portrait are Unsplash placeholders; the portrait is an anonymous silhouette labelled as María, and the hero source is only 800 px wide. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
 | 15 | high     | Links | Instagram and WhatsApp point to `#`. Both Live art buttons do nothing. | 2 |
@@ -83,8 +83,9 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`. Rows are s
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
 | 2  | medium   | Tooling | Only `package-lock.json` is tracked, so Vercel installs with npm. `pnpm-lock.yaml` is not in the repo. | 0 |
 | 3  | medium   | Tooling | `lint` runs the deprecated `next lint`, which newer Next.js removes. The ESLint config ignores no folders, so `eslint .` reports thousands of errors once `.next` exists. No `typecheck` or `test` script. | 0 |
-| 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Fixing it means rewriting history: the owner decides. | 0 |
-| 26 | medium   | Security | No `Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy` or `Permissions-Policy` header. `X-Powered-By` is sent. | 0 |
+| 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
+| 26 | medium   | Security | No `X-Content-Type-Options`, `X-Frame-Options` (or equivalent frame rule), `Referrer-Policy` or `Permissions-Policy` header. `X-Powered-By` is sent (`poweredByHeader: false` removes it). | 0 |
+| 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
 | 27 | medium   | Errors | `error.tsx` shows the raw error message to visitors (§9) and logs the error in the browser console. | 0 |
 | 6  | medium   | CSS | The unlayered `p` rule in `globals.css` overrides Tailwind's size and line-height utilities, so `text-xl` on a paragraph renders at 16 px. | 1 |
 | 8  | medium   | Fonts | `Quicksand` and `Dancing Script` are referenced but never loaded, so a fallback shows. `body` is set to Arial. | 1 |

@@ -20,9 +20,9 @@ The build order for Haperd & Co. `docs/project.md` describes each item in detail
 
 **Lanes:** one. The lead plans it like any other phase, and gives every task to one developer.
 
-**Needed from the product owner:** nothing at the start. The Vercel project exists (`zambrana90s-projects/haperd`) and checks the repo's commits. During this phase, after the Next.js upgrade (#1) is merged and before the last task: turn off automatic production promotion, allow `*.vercel.app` in each developer's sandbox, and add `VERCEL_AUTOMATION_BYPASS_SECRET` to each developer's env file (Vercel → Deployment Protection → Protection Bypass for Automation). The lead plans the Vercel check as the last task.
+**Needed from the product owner:** nothing at the start. The Vercel project exists (`zambrana90s-projects/haperd`) and checks the repo's commits. During this phase, before the Next.js upgrade (#1) is merged: turn off automatic production promotion. After it is merged and before the last task: allow `*.vercel.app` in each developer's sandbox, and add `VERCEL_AUTOMATION_BYPASS_SECRET` to each developer's env file (Vercel → Deployment Protection → Protection Bypass for Automation). The lead plans the Vercel check as the last task.
 
-The first deployment (`c1bd7b3`) failed on 2026-11-25, likely because of the vulnerable Next.js 15.3.0. Confirm in the build log.
+The first deployment (`c1bd7b3`) failed on 2026-11-25. The build log confirms the cause: Vercel blocks the vulnerable Next.js 15.3.0 (#21).
 
 ### Step 1 — Audit the project (always first)
 
@@ -131,7 +131,7 @@ The shared zod schema comes first, in one task. Lane B mocks the API until Lane 
 
 | Lane             | Includes                                                                                                                                  | project.md  |
 | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| **A — Security** | Pass over every security rule; rate limit on `/api/contact`; security headers; re-run the dependency audit                                | §9          |
+| **A — Security** | Pass over every security rule; rate limit on `/api/contact`; Content-Security-Policy (#34); re-run the dependency audit                  | §9          |
 | **B — Launch**   | Browser check: Chrome, Safari (iOS), Firefox, Android Chrome. Domain connected, `NEXT_PUBLIC_SITE_URL` set. Final content review by the product owner | §5, §7, §11 |
 
 **Done when:** all seven steps of the core flow (`project.md` §2) pass on the production URL, on a phone and a desktop.
