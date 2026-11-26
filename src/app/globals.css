@@ -100,6 +100,11 @@
     color-scheme: light;
   }
 
+  /* Keeps the page width, so content does not jump between short and long pages. */
+  html {
+    scrollbar-gutter: stable;
+  }
+
   body {
     background-color: var(--color-white);
     color: var(--color-ink);
