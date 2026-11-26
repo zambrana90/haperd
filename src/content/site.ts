@@ -1,9 +1,8 @@
 export const SITE = {
   name: 'Haperd&Co.',
   social: {
-    // TODO(Phase 2): real URL from the owner
-    instagram: '#',
-    // TODO(Phase 2): real URL from the owner
-    whatsapp: '#',
+    instagram: 'https://www.instagram.com/haperdandco',
+    // TODO(Phase 2): link from the owner's number. While empty, no icon is shown.
+    whatsapp: '',
   },
 } as const;

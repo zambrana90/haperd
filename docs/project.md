@@ -72,8 +72,8 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 14 | high     | Images | The hero is a marked local placeholder (`public/images/hero/`). The portrait is an Unsplash placeholder: an anonymous silhouette labelled as María. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
-| 15 | high     | Links | Instagram and WhatsApp point to `#`. | 2 |
+| 14 | high     | Images | The hero (`public/images/hero/`), the portrait (`public/images/about-us/`) and the Live art painting (`public/images/live-art/`) are marked local placeholders. | 2 |
+| 15 | high     | Links | The WhatsApp number has not arrived, so the footer shows no WhatsApp link. | 2 |
 | 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
@@ -272,7 +272,7 @@ The owner answers these. Delete a row once answered, and write the answer where 
 | #  | Question                                                                                                     | Needed by |
 | -- | ------------------------------------------------------------------------------------------------------------ | --------- |
 | 1  | Real images: hero artwork, María's portrait, live art photos, logo or favicon                                | Phase 2   |
-| 2  | Instagram URL and WhatsApp number                                                                            | Phase 2   |
+| 2  | WhatsApp number                                                                                              | Phase 2   |
 | 3  | The "¿Cómo trabajamos?" steps                                                                                | Phase 2   |
 | 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 3   |
 | 6  | Is `haperd.com` registered, and is `hola@haperd.com` a working inbox?                                        | Phase 3   |
