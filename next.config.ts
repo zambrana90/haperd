@@ -5,9 +5,6 @@ const nextConfig: NextConfig = {
   // Stops `next dev` from generating AGENTS.md; agent rules live in CLAUDE.md.
   agentRules: false,
   poweredByHeader: false,
-  images: {
-    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
-  },
   headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
