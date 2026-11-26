@@ -17,11 +17,17 @@ function LargeHeader() {
   return (
     <header className='relative flex min-h-65 w-full flex-col sm:min-h-95 md:min-h-137.5'>
       <SkipLink />
+      {/*
+        TODO(owner): placeholder until the hero artwork arrives (project.md §12).
+        `sizes` is the rendered width: at the header's minimum heights (260, 380
+        and 550px), object-cover makes this 2400×1100 image wider than a narrow
+        screen. Update it if the artwork has another aspect ratio.
+      */}
       <Image
-        src='https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'
+        src='/images/hero/hero-placeholder.jpg'
         alt=''
         fill
-        sizes='100vw'
+        sizes='(max-width: 639px) 570px, (max-width: 767px) 830px, (max-width: 1199px) 1200px, 100vw'
         preload
         className='object-cover object-center'
       />
