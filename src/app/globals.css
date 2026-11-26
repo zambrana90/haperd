@@ -123,9 +123,15 @@
     color-scheme: light;
   }
 
-  /* Keeps the page width, so content does not jump between short and long pages. */
+  /*
+   * The gutter keeps the page width, so content does not jump between short and
+   * long pages. The thumb is 5.21:1 against the track. Browsers without
+   * scrollbar-color keep their own scrollbar.
+   */
   html {
     scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-rose-deep) var(--color-off-white);
   }
 
   body {
