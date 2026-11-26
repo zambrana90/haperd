@@ -186,6 +186,8 @@ Modern and elegant, still recognisably Haperd. Hand-painted and editorial, not a
 | Fallback    | Content is visible without JavaScript and in browsers without a feature                             |
 | Accessibility | `prefers-reduced-motion: reduce` turns off movement                                               |
 
+**Exception** (owner decision, 2026-11-26): the page fade is kept as it is. Some browsers ignore clicks for about 0.4 s while it runs, and the owner accepts that.
+
 ---
 
 ## 8. Quality targets
