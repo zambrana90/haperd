@@ -6,7 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { Heading } from '@/components/ui/Heading';
 import { Lead } from '@/components/ui/Lead';
 import { Section } from '@/components/ui/Section';
-import { SAMPLE_STEPS } from '@/content/live-art';
+import { LIVE_ART_PHOTO, SAMPLE_STEPS } from '@/content/live-art';
 
 const STEPS_ID = 'como-trabajamos';
 // The id is on the Contact page's form.
@@ -50,12 +50,9 @@ export default function LiveArt() {
                 </Button>
               </div>
             </div>
-            {/* TODO(owner): placeholder until the live art photos arrive (project.md §12). */}
             <Image
-              src='/images/live-art/painting-placeholder.jpg'
-              alt='Imagen de ejemplo'
-              width={1200}
-              height={1500}
+              {...LIVE_ART_PHOTO}
+              alt={LIVE_ART_PHOTO.alt}
               sizes='(min-width: 72rem) 400px, (min-width: 64rem) 35vw, (min-width: 28rem) 384px, calc(100vw - 5rem)'
               className='mx-auto h-auto w-full max-w-sm rounded-card shadow-soft lg:max-w-none'
             />

@@ -72,7 +72,7 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
-| 14 | high     | Images | The hero (`public/images/hero/`), the portrait (`public/images/about-us/`) and the Live art painting (`public/images/live-art/`) are marked local placeholders. | 2 |
+| 14 | high     | Images | The portrait (`public/images/about-us/`) is a marked local placeholder, and there is no logo or final favicon. The hero photo is 1080 px square, so wide screens upscale it. | 2 |
 | 15 | high     | Links | The WhatsApp number has not arrived, so the footer shows no WhatsApp link. | 2 |
 | 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
@@ -100,7 +100,7 @@ No new pages. We improve the four that exist.
 
 | Page          | Content                                                                                      | Done when                                                       |
 | ------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| **Home**      | Hero, intro, "¿Qué ofrecemos?" (stationery links to Contact, live art to Live art; owner decision, 2026-11-26), call to action to Contact | The offer is clear on a phone; both services link onward        |
+| **Home**      | Hero, intro, "¿Qué ofrecemos?" with three services: wedding stationery and personalised illustration (both link to Contact) and Live art (links to Live art); owner decisions, 2026-11-26. Call to action to Contact | The offer is clear on a phone; every service links onward       |
 | **Live art**  | Service text, "¿Cómo trabajamos?" steps on the same page, "¿Hablamos?"                       | Both buttons work                                               |
 | **About us**  | María's portrait, story and signature                                                        | Real portrait; long text is comfortable to read                 |
 | **Contact**   | Intro, form (§6), business email link, FAQ                                                   | §6 passes; FAQ opens and closes by keyboard                     |
@@ -271,7 +271,7 @@ The owner answers these. Delete a row once answered, and write the answer where 
 
 | #  | Question                                                                                                     | Needed by |
 | -- | ------------------------------------------------------------------------------------------------------------ | --------- |
-| 1  | Real images: hero artwork, María's portrait, live art photos, logo or favicon                                | Phase 2   |
+| 1  | Missing images: María's portrait, logo or favicon, a larger hero (if there is one)                           | Phase 2   |
 | 2  | WhatsApp number                                                                                              | Phase 2   |
 | 3  | The "¿Cómo trabajamos?" steps                                                                                | Phase 2   |
 | 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 3   |
