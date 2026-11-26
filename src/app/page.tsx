@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
+import { ServiceRows } from '@/components/home/ServiceRows';
 import { PageTransition } from '@/components/PageTransition';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
@@ -8,52 +8,10 @@ import { Heading } from '@/components/ui/Heading';
 import { Lead } from '@/components/ui/Lead';
 import { Section } from '@/components/ui/Section';
 import { PAGE_SEO } from '@/content/seo';
-import { SERVICES, type Service } from '@/content/home';
+import { SERVICES } from '@/content/home';
 import { pageMetadata } from '@/lib/seo/page-metadata';
 
 export const metadata = pageMetadata(PAGE_SEO.home);
-
-// Rendered widths: the card's inner width, and 80% and 60% of it for a pair.
-const PHOTO_SIZES = {
-  single:
-    '(min-width: 72rem) 280px, (min-width: 64rem) 25vw, (min-width: 34rem) 464px, calc(100vw - 5rem)',
-  back: '(min-width: 72rem) 224px, (min-width: 64rem) 20vw, (min-width: 34rem) 372px, 64vw',
-  front:
-    '(min-width: 72rem) 168px, (min-width: 64rem) 15vw, (min-width: 34rem) 278px, 48vw',
-};
-
-/** A square: one photo, or two overlapping from opposite corners. */
-function ServicePhotos({ photos }: Pick<Service, 'photos'>) {
-  const [first, second] = photos;
-
-  if (!second) {
-    return (
-      <Image
-        {...first}
-        alt={first.alt}
-        sizes={PHOTO_SIZES.single}
-        className='aspect-square h-auto w-full rounded-card object-cover'
-      />
-    );
-  }
-
-  return (
-    <div className='relative aspect-square w-full'>
-      <Image
-        {...first}
-        alt={first.alt}
-        sizes={PHOTO_SIZES.back}
-        className='absolute top-0 left-0 h-auto w-4/5 rounded-card'
-      />
-      <Image
-        {...second}
-        alt={second.alt}
-        sizes={PHOTO_SIZES.front}
-        className='absolute right-0 bottom-0 h-auto w-3/5 rounded-card border-4 border-white shadow-lifted'
-      />
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -93,28 +51,7 @@ export default function Home() {
               </Heading>
             }
           >
-            {/* One column, then three with the middle one set lower. */}
-            <ul className='mx-auto grid max-w-lg gap-8 lg:max-w-none lg:grid-cols-3 lg:items-start'>
-              {SERVICES.map((service) => (
-                <li
-                  key={service.title}
-                  className='reveal flex flex-col items-start gap-4 rounded-card bg-white p-6 shadow-soft lg:p-8 lg:nth-2:mt-24'
-                >
-                  <ServicePhotos photos={service.photos} />
-                  <Heading level={3} className='mt-2'>
-                    {service.title}
-                  </Heading>
-                  {service.description.map((paragraph) => (
-                    <p key={paragraph} className='text-lg'>
-                      {paragraph}
-                    </p>
-                  ))}
-                  <Button href={service.link.href} variant='secondary'>
-                    {service.link.label}
-                  </Button>
-                </li>
-              ))}
-            </ul>
+            <ServiceRows services={SERVICES} />
           </Section>
 
           <Section
