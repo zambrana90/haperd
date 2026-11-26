@@ -8,7 +8,7 @@ export default function Home() {
 
       <main id='main' className='flex-1 flex flex-col mb-auto bg-rose text-ink'>
         <div className='flex flex-col md:flex-row w-full max-w-6xl pb-10 mx-auto justify-between gap-6 md:gap-10 px-4 sm:px-8'>
-          <section className='flex flex-col items-start font-mono w-full md:w-3xl pt-12 md:pt-24 mb-0'>
+          <section className='flex flex-col items-start w-full md:w-3xl pt-12 md:pt-24 mb-0'>
             <p className='mb-6 text-xl'>
               En Haperd and Co. no hacemos papelería, creamos momentos.
               <br />
@@ -29,7 +29,7 @@ export default function Home() {
               Haperd
             </h1>
             <div className='w-full max-w-lg mt-8 md:mt-0'>
-              <h2 className='text-2xl font-mono mb-6'>¿Qué ofrecemos?</h2>
+              <h2 className='text-2xl font-serif mb-6'>¿Qué ofrecemos?</h2>
               <p className='mb-6 text-xl'>
                 Nos mueve el amor, el diseño y todo lo que se sale del molde.
                 Queremos conoceros, saber qué os hace especiales, cómo os

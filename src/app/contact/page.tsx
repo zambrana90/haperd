@@ -35,11 +35,11 @@ export default function Contact() {
           <div className='flex flex-col md:flex-row gap-6 md:gap-10 justify-between'>
             {/* Left: FAQ and intro */}
             <div className='w-full md:flex-1 md:pr-12 mb-8 md:mb-0'>
-              <h1 className='font-mono text-xl sm:text-2xl md:text-3xl text-ink mb-6 md:mb-10 text-center md:text-left'>
+              <h1 className='font-serif text-xl sm:text-2xl md:text-3xl text-ink mb-6 md:mb-10 text-center md:text-left'>
                 ¿Quieres ilustración en <br className='hidden md:block' />
                 vivo para tu evento?
               </h1>
-              <div className='text-rose-ink font-mono text-base md:text-[15px] mb-8 max-w-125'>
+              <div className='text-rose-ink text-base md:text-[15px] mb-8 max-w-125'>
                 <div className='mb-3'>
                   ¡Entonces hablemos!
                   <br />
@@ -78,18 +78,18 @@ export default function Contact() {
             </div>
             {/* Right: Contact box */}
             <div className='w-full md:w-[320px] flex flex-col'>
-              <label className='font-mono text-lg text-ink mb-2'>
+              <label className='text-lg text-ink mb-2'>
                 Contacto
               </label>
               <textarea
-                className='border border-rose-soft rounded-md min-h-[150px] md:min-h-[400px] w-full p-3 font-mono text-ink bg-white resize-none mb-4 focus-visible:ring-2 focus-visible:ring-rose-deep focus-visible:outline-none'
+                className='border border-rose-soft rounded-md min-h-[150px] md:min-h-[400px] w-full p-3 text-ink bg-white resize-none mb-4 focus-visible:ring-2 focus-visible:ring-rose-deep focus-visible:outline-none'
                 placeholder='Tu mensaje...'
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
               <button
                 type='button'
-                className={`rounded-full bg-rose-deep text-white font-mono text-xl px-8 py-3 mt-2 shadow transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-deep focus:ring-offset-2 w-full cursor-pointer ${
+                className={`rounded-full bg-rose-deep text-white text-xl px-8 py-3 mt-2 shadow transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-deep focus:ring-offset-2 w-full cursor-pointer ${
                   !message.trim() || loading
                     ? 'opacity-50 cursor-not-allowed'
                     : 'hover:bg-navy hover:-translate-y-1 hover:shadow-xl'
@@ -104,7 +104,7 @@ export default function Contact() {
 
           {/* FAQ Section */}
           <div className='mt-16'>
-            <h2 className='font-mono text-xl md:text-2xl text-ink text-center mb-8'>
+            <h2 className='font-serif text-xl md:text-2xl text-ink text-center mb-8'>
               Preguntas Frecuentes
             </h2>
             <div className='flex flex-col gap-4 mx-auto'>

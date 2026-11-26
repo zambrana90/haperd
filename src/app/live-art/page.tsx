@@ -16,7 +16,7 @@ export default function LiveArt() {
           </div>
           <div className='flex flex-col md:flex-row w-full max-w-6xl pb-10 mx-auto justify-between gap-6 md:gap-10 px-4 sm:px-8'>
             {/* Left column: Text */}
-            <section className='flex flex-col items-start font-mono w-full md:w-3xl pt-12 md:pt-24 mb-8 md:mb-0'>
+            <section className='flex flex-col items-start w-full md:w-3xl pt-12 md:pt-24 mb-8 md:mb-0'>
               <p className='mb-6 text-lg md:text-xl'>
                 Y atención, que aquí viene la magia...
                 <br />
@@ -40,10 +40,10 @@ export default function LiveArt() {
             <div className='flex-grow' />
             <section className='flex flex-col items-start justify-end w-full md:w-auto'>
               <div className='flex flex-col gap-6 w-full items-center'>
-                <button className='bg-white text-rose-deep font-mono text-xl px-4 py-2 rounded-xl shadow-lg transition hover:-translate-y-1 hover:shadow-xl w-full cursor-pointer'>
+                <button className='bg-white text-rose-deep text-xl px-4 py-2 rounded-xl shadow-lg transition hover:-translate-y-1 hover:shadow-xl w-full cursor-pointer'>
                   ¿Hablamos?
                 </button>
-                <button className='bg-white text-rose-deep font-mono text-xl px-4 py-2 rounded-xl shadow-lg transition hover:-translate-y-1 hover:shadow-xl w-full cursor-pointer'>
+                <button className='bg-white text-rose-deep text-xl px-4 py-2 rounded-xl shadow-lg transition hover:-translate-y-1 hover:shadow-xl w-full cursor-pointer'>
                   ¿Cómo trabajamos?
                 </button>
               </div>
