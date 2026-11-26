@@ -6,10 +6,10 @@ export default function AboutUs() {
   return (
     <>
       <div className='flex flex-col min-h-screen'>
-        <Header />
-        <main className='flex-1 w-full bg-white'>
+        <Header variant='large' />
+        <main id='main' className='flex-1 w-full bg-white'>
           <div className='w-full max-w-[900px] mx-auto px-4 md:pl-[100px] pt-6'>
-            <h1 className='font-serif text-2xl md:text-[56px] text-[#2a2341] mb-2 leading-none'>
+            <h1 className='font-serif text-2xl md:text-[56px] text-ink mb-2 leading-none'>
               About us
             </h1>
           </div>
@@ -17,22 +17,18 @@ export default function AboutUs() {
           <div className='flex flex-col md:flex-row items-start gap-8 md:gap-16 px-4 sm:px-8 md:px-16 pb-6 max-w-6xl mx-auto'>
             {/* Left: Circular Image with background circle */}
             <div className='relative flex-shrink-0 flex items-center justify-center w-full md:w-auto mb-6 md:mb-0'>
-              <div className='absolute left-1 top-0 md:left-4 md:top-2 w-[260px] h-[260px] bg-[#e6d1ce] rounded-full -z-10' />
+              <div className='absolute left-1 top-0 md:left-4 md:top-2 w-[260px] h-[260px] bg-blush rounded-full -z-10' />
               <Image
                 src='https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=facearea&w=320&h=320&facepad=2&q=80' // placeholder
                 alt='María - Haperd&Co.'
-                className='w-[220px] h-[220px] object-cover rounded-full grayscale border-8 border-[#fff] shadow-xl'
-                style={{ marginLeft: '30px' }}
+                className='w-[220px] h-[220px] object-cover rounded-full grayscale border-8 border-white shadow-xl ml-7.5'
                 width={220}
                 height={220}
               />
             </div>
             {/* Right: Text Content */}
             <div className='flex-1 flex flex-col justify-start items-start mt-2'>
-              <div
-                className='text-[#b18a8b] font-[quicksand,sans-serif] text-base md:text-lg leading-relaxed max-w-2xl'
-                style={{ fontWeight: 500 }}
-              >
+              <div className='text-rose-ink font-sans font-medium text-base md:text-lg leading-relaxed max-w-2xl'>
                 <p className='mb-3 text-lg'>
                   La mente (y el pincel) detrás de Haperd&Co.
                   <br />
@@ -78,13 +74,7 @@ export default function AboutUs() {
                   vosotros… Bienvenidos a Haperd.
                 </p>
                 <p className='mb-3 text-lg'>Aquí, cada trazo cuenta.</p>
-                <div
-                  className='mt-5 text-[#b18a8b] text-xl md:text-2xl'
-                  style={{
-                    fontFamily: 'Dancing Script, cursive',
-                    fontWeight: 400,
-                  }}
-                >
+                <div className='mt-5 font-script font-normal text-xl md:text-2xl'>
                   con cariño
                   <br />
                   María

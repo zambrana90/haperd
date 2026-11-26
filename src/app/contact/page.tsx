@@ -29,20 +29,17 @@ export default function Contact() {
 
   return (
     <div className='flex flex-col min-h-screen bg-white'>
-      <Header variant='contact' />
-      <main className='flex-1 w-full bg-white mb-24'>
+      <Header variant='compact' />
+      <main id='main' className='flex-1 w-full bg-white mb-24'>
         <div className='max-w-5xl mx-auto px-4 sm:px-6 md:px-0 pt-6 md:pt-24'>
           <div className='flex flex-col md:flex-row gap-6 md:gap-10 justify-between'>
             {/* Left: FAQ and intro */}
             <div className='w-full md:flex-1 md:pr-12 mb-8 md:mb-0'>
-              <h2 className='font-mono text-xl sm:text-2xl md:text-3xl text-[#2a2341] mb-6 md:mb-10 text-center md:text-left'>
+              <h1 className='font-serif text-xl sm:text-2xl md:text-3xl text-ink mb-6 md:mb-10 text-center md:text-left'>
                 ¿Quieres ilustración en <br className='hidden md:block' />
                 vivo para tu evento?
-              </h2>
-              <div
-                className='text-[#b18a8b] font-mono text-base md:text-[15px] mb-8'
-                style={{ maxWidth: 500 }}
-              >
+              </h1>
+              <div className='text-rose-ink text-base md:text-[15px] mb-8 max-w-125'>
                 <div className='mb-3'>
                   ¡Entonces hablemos!
                   <br />
@@ -52,7 +49,7 @@ export default function Contact() {
                   ser contada con pinceles y color.
                 </div>
                 <div className='mb-3'>
-                  <span className='font-bold text-[#2a2341]'>
+                  <span className='font-bold text-ink'>
                     ¿Es una boda?
                   </span>
                   <br />
@@ -61,7 +58,7 @@ export default function Contact() {
                   como vosotros.
                 </div>
                 <div className='mb-3'>
-                  <span className='font-bold text-[#2a2341]'>
+                  <span className='font-bold text-ink'>
                     ¿Es un evento de empresa o marca?
                   </span>
                   <br />
@@ -81,21 +78,21 @@ export default function Contact() {
             </div>
             {/* Right: Contact box */}
             <div className='w-full md:w-[320px] flex flex-col'>
-              <label className='font-mono text-lg text-[#2a2341] mb-2'>
+              <label className='text-lg text-ink mb-2'>
                 Contacto
               </label>
               <textarea
-                className='border border-[#b18a8b] rounded-md min-h-[150px] md:min-h-[400px] w-full p-3 font-mono text-[#2a2341] bg-white resize-none mb-4 focus-visible:ring-2 focus-visible:ring-[#b18a8b] focus-visible:outline-none'
+                className='border border-rose-soft rounded-md min-h-[150px] md:min-h-[400px] w-full p-3 text-ink bg-white resize-none mb-4 focus-visible:ring-2 focus-visible:ring-rose-deep focus-visible:outline-none'
                 placeholder='Tu mensaje...'
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
               />
               <button
                 type='button'
-                className={`rounded-full bg-[#b18a8b] text-white font-mono text-xl px-8 py-3 mt-2 shadow transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#b18a8b] focus:ring-offset-2 w-full cursor-pointer ${
+                className={`rounded-full bg-rose-deep text-white text-xl px-8 py-3 mt-2 shadow transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-rose-deep focus:ring-offset-2 w-full cursor-pointer ${
                   !message.trim() || loading
                     ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:bg-[#a67c7c] hover:-translate-y-1 hover:shadow-xl'
+                    : 'hover:bg-navy hover:-translate-y-1 hover:shadow-xl'
                 }`}
                 disabled={!message.trim() || loading}
                 onClick={handleSend}
@@ -107,9 +104,9 @@ export default function Contact() {
 
           {/* FAQ Section */}
           <div className='mt-16'>
-            <h3 className='font-mono text-xl md:text-2xl text-[#2a2341] text-center mb-8'>
+            <h2 className='font-serif text-xl md:text-2xl text-ink text-center mb-8'>
               Preguntas Frecuentes
-            </h3>
+            </h2>
             <div className='flex flex-col gap-4 mx-auto'>
               {/* FAQCollapse examples */}
               {/* Import FAQCollapse at the top of the file */}
