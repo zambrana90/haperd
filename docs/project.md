@@ -52,7 +52,7 @@ When this works end to end on a phone and a desktop, the product is done.
 
 ## 4. Current state
 
-Checked on 2026-11-26, at commit `876cc58`. Updated for the Next.js 16 upgrade: `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6. Tests cover the security headers and the contact route.
+Checked on 2026-11-26, at commit `4ff5069`: Phase 0 done. `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6, `pnpm audit --prod` reports no known vulnerabilities, and all four pages work on a Vercel preview. Rows for later phases were not re-checked.
 
 ### What exists
 
