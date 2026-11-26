@@ -54,6 +54,8 @@ When this works end to end on a phone and a desktop, the product is done.
 
 Checked on 2026-11-26, at commit `4ff5069`: Phase 0 done. `pnpm lint`, `pnpm typecheck`, `pnpm test` and `pnpm build` pass on Next.js 16.4.6, `pnpm audit --prod` reports no known vulnerabilities, and all four pages work on a Vercel preview. Rows for later phases were not re-checked.
 
+Phase 4 check on 2026-11-26, after commit `a756988`, on all four pages: Lighthouse Accessibility, Best Practices and SEO scored 100 and Performance 94 or more (mobile, local production build), CLS was 0, the worst scripted interaction was 64 ms (Chromium, 4x CPU slowdown), nothing moved with reduced motion, and content was readable with JavaScript off. Largest Contentful Paint is #35.
+
 ### What exists
 
 | Route          | File                           | Content                                             |
@@ -77,6 +79,8 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 18 | high     | Contact API | `/api/contact` has no rate limit. | 5 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
+| 35 | medium   | Performance | Largest Contentful Paint depends on how it is measured. Lighthouse mobile on a local production build (simulated throttling) reports 2.8–3.1 s, over the 2.5 s target. Medians were 2.3–2.5 s on Vercel previews, with little margin, and about 1.9 s locally with applied throttling. Measure again on the production domain. | 5 |
+| 36 | low      | Performance | First-load JavaScript is 148 kB gzipped (181 kB on Contact) against a 101 kB shared baseline. A bare Next 16.4.6 page is already 134 kB. Contact's extra 33 kB is almost all zod in the browser; making it smaller changes the shared contact schema (`src/lib/contact`). | 5 |
 
 ---
 
