@@ -1,19 +1,13 @@
 'use client';
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
-  console.log(error);
+// The error itself is not shown or logged: visitors never see internal details.
+export default function Error({ reset }: { reset: () => void }) {
   return (
     <div style={{ padding: 40, color: 'red', fontFamily: 'monospace' }}>
-      <h1>Something went wrong!</h1>
-      <p>{error.message}</p>
+      <h1>Algo ha salido mal</h1>
+      <p>No hemos podido mostrar esta página. Inténtalo de nuevo.</p>
       <button onClick={reset} style={{ marginTop: 20 }}>
-        Try Again
+        Reintentar
       </button>
     </div>
   );
