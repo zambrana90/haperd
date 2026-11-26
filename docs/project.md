@@ -59,7 +59,7 @@ Checked on 2026-11-26, at commit `4ff5069`: Phase 0 done. `pnpm lint`, `pnpm typ
 | Route          | File                           | Content                                             |
 | -------------- | ------------------------------ | --------------------------------------------------- |
 | `/`            | `src/app/page.tsx`             | Hero header, intro text, "¿Qué ofrecemos?"          |
-| `/live-art`    | `src/app/live-art/page.tsx`    | Live art service text, two buttons                  |
+| `/live-art`    | `src/app/live-art/page.tsx`    | Live art service text, sample work steps, links     |
 | `/about-us`    | `src/app/about-us/page.tsx`    | María's story with a portrait                       |
 | `/contact`     | `src/app/contact/page.tsx`     | Intro, message box, three FAQs                      |
 | `/api/contact` | `src/app/api/contact/route.ts` | Sends the message over SMTP with `nodemailer`       |
@@ -73,7 +73,7 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | #  | Severity | Area | Problem | Phase |
 | -- | -------- | ---- | ------- | ----- |
 | 14 | high     | Images | The hero is a marked local placeholder (`public/images/hero/`). The portrait is an Unsplash placeholder: an anonymous silhouette labelled as María. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
-| 15 | high     | Links | Instagram and WhatsApp point to `#`. Both Live art buttons do nothing. | 2 |
+| 15 | high     | Links | Instagram and WhatsApp point to `#`. | 2 |
 | 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
@@ -110,7 +110,7 @@ No new pages. We improve the four that exist.
 - Keep the existing Spanish text. Improve layout, not wording.
 - Voice: the business speaks as "we". María's life story stays in "I".
 - New text is short and in Spanish. List it in the PR so the owner can approve it.
-- The "¿Cómo trabajamos?" steps don't exist yet. Ask the owner for them. Never invent how the business works, prices or testimonials.
+- The "¿Cómo trabajamos?" steps don't exist yet. Ask the owner for them. Never invent how the business works, prices or testimonials. Until the real steps arrive, Live art shows sample steps labelled "Texto de ejemplo" (owner decision, 2026-11-26).
 
 ---
 
