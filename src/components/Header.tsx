@@ -5,8 +5,7 @@ import { Navbar } from './Navbar';
 import { SkipLink } from './SkipLink';
 
 type HeaderProps = {
-  /** `contact` is a temporary alias of `compact`, until the pages stop using it. */
-  variant?: 'large' | 'compact' | 'contact';
+  variant?: 'large' | 'compact';
 };
 
 export function Header({ variant = 'large' }: HeaderProps) {

@@ -4,14 +4,11 @@ import { Header } from '@/components/Header';
 export default function Home() {
   return (
     <div className='flex flex-col min-h-screen'>
-      <Header />
+      <Header variant='large' />
 
-      <main
-        style={{ flex: 1, backgroundColor: 'rgb(189, 138, 135)' }}
-        className='flex-1 flex flex-col mb-auto'
-      >
+      <main id='main' className='flex-1 flex flex-col mb-auto bg-rose text-ink'>
         <div className='flex flex-col md:flex-row w-full max-w-6xl pb-10 mx-auto justify-between gap-6 md:gap-10 px-4 sm:px-8'>
-          <section className='flex flex-col items-start text-white font-mono w-full md:w-3xl pt-12 md:pt-24 mb-0'>
+          <section className='flex flex-col items-start font-mono w-full md:w-3xl pt-12 md:pt-24 mb-0'>
             <p className='mb-6 text-xl'>
               En Haperd and Co. no hacemos papelería, creamos momentos.
               <br />
@@ -26,21 +23,12 @@ export default function Home() {
             </p>
           </section>
           {/* Right column */}
-          <h1
-            className='md:hidden text-6xl md:text-9xl font-serif font-bold opacity-80 ml-auto w-full text-center'
-            style={{ color: 'rgb(158, 114, 113)' }}
-          >
-            Haperd
-          </h1>
           <div className='hidden md:block flex-grow' />
           <section className='flex flex-col items-start justify-between md:pt-12'>
-            <h1
-              className='hidden md:block text-6xl md:text-8xl font-serif font-bold opacity-80 ml-auto w-full text-center md:py-16'
-              style={{ color: 'rgb(158, 114, 113)' }}
-            >
+            <h1 className='text-6xl md:text-8xl font-serif font-bold ml-auto w-full text-center md:py-16'>
               Haperd
             </h1>
-            <div className='w-full max-w-lg text-white mt-8 md:mt-0'>
+            <div className='w-full max-w-lg mt-8 md:mt-0'>
               <h2 className='text-2xl font-mono mb-6'>¿Qué ofrecemos?</h2>
               <p className='mb-6 text-xl'>
                 Nos mueve el amor, el diseño y todo lo que se sale del molde.
