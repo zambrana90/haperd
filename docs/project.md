@@ -52,7 +52,7 @@ When this works end to end on a phone and a desktop, the product is done.
 
 ## 4. Current state
 
-Checked on 2026-11-25, at commit `c1bd7b3`. `pnpm`-installed dependencies built successfully with Next.js 15.3.0 and `eslint src` reported nothing. There are no tests.
+Checked on 2026-11-26, at commit `876cc58`. With both pnpm and npm, install and build succeed on Next.js 15.3.0, and `pnpm lint` and `tsc --noEmit` pass. Vercel still rejects every deployment (#21). There are no tests.
 
 ### What exists
 
@@ -68,30 +68,44 @@ Shared components in `src/components`: `Header`, `Navbar`, `MobileMenu`, `Footer
 
 ### Known problems
 
-From a quick review, not a full audit. Phase 0 starts with the full audit and updates this table. Each one is assigned to a phase in `plan.md`. Remove a row when its fix is merged.
+From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the owner accepted it (—). Rows are sorted by severity; numbers are stable IDs, so they are not in order. Remove a row when its fix is merged.
 
-| #  | Area          | Problem                                                                                                                              | Phase |
-| -- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----- |
-| 1  | Security      | `npm audit` reports a **critical** advisory set for Next.js 15.3.0, including remote code execution, plus high ones in `nodemailer`, `sharp` and PostCSS. | 0     |
-| 2  | Tooling       | Two lockfiles: `package-lock.json` (tracked) and `pnpm-lock.yaml` (untracked).                                                       | 0     |
-| 3  | Tooling       | `lint` runs `next lint`, which newer Next.js removes. No `typecheck` or `test` script.                                               | 0     |
-| 4  | Config        | `next.config.ts` uses `module.exports` and the deprecated `images.domains`.                                                          | 0     |
-| 5  | Config        | `@netlify/plugin-nextjs` is installed, but hosting is Vercel. `README.md` is the create-next-app default.                            | 0     |
-| 6  | CSS           | The unlayered `p` rule in `globals.css` overrides Tailwind's size and line-height utilities, so `text-xl` on a paragraph does nothing. | 1     |
-| 7  | CSS           | System dark mode changes the `body` colors, but pages are designed light only.                                                       | 1     |
-| 8  | Fonts         | `Quicksand` and `Dancing Script` are referenced but never loaded. `body` is set to Arial.                                            | 1     |
-| 9  | Animation     | `animate-fade-in` is used but not defined, so nothing fades.                                                                         | 1     |
-| 10 | Header        | Offsets such as `mr-64` break the subtitle on narrow screens. The whole header is a client component.                                | 1     |
-| 11 | Navigation    | `Navbar` renders a second, never visible `MobileMenu`. The nav item list is duplicated. The menu has no `aria-expanded` or Escape handling. | 1     |
-| 12 | Accessibility | Pages have several `h1` elements, some duplicated for mobile and desktop. `lang="en"` on Spanish content.                            | 1, 2  |
-| 13 | Contrast      | White on the rose `#bd8a87`, and `#b18a8b` on white, are about 3:1. Normal text needs 4.5:1.                                         | 1     |
-| 14 | Images        | Hero and portrait are Unsplash placeholders. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 2-byte empty files. | 2     |
-| 15 | Links         | Instagram and WhatsApp point to `#`. Both Live art buttons do nothing.                                                               | 2     |
-| 16 | Contact       | The form asks only for a message, so nobody can reply to it.                                                                         | 3     |
-| 17 | Contact       | The form ignores error responses: a failed send clears the message and shows nothing.                                                | 3     |
-| 18 | Contact API   | No length limit, spam protection or handling of invalid JSON. The recipient address is hardcoded.                                    | 3     |
-| 19 | Errors        | `error.tsx` shows the raw error message. There is no `not-found.tsx`.                                                                | 4     |
-| 20 | SEO           | One title for every page. No Open Graph data, `sitemap` or `robots`.                                                                 | 4     |
+| #  | Severity | Area | Problem | Phase |
+| -- | -------- | ---- | ------- | ----- |
+| 1  | critical | Dependencies | `next` 15.3.0 has **critical** advisories, including remote code execution (one path is the image optimizer). `nodemailer` 6.10.1, `sharp` and PostCSS have high ones. `next` needs 15.5.28 or later. | 0 |
+| 21 | critical | Deploy | All Vercel deployments fail with `VULNERABLE_NEXTJS_VERSION`. The build passes; Vercel blocks the output because of Next.js 15.3.0 (#1). | 0 |
+| 24 | high     | Privacy | A personal email address is hardcoded as the recipient in `src/app/api/contact/route.ts` (since `c1bd7b3`), in a public repo. Remove it from the code. It stays in the git history by owner decision (2026-11-26). | 0 |
+| 13 | high     | Contrast | White on the rose `#bd8a87` is 2.9:1, `#b18a8b` on white is 3.05:1, and the large "Haperd" and "Live art" headings on rose are 1.3:1. Body text needs 4.5:1, large text 3:1. The header tagline over the photo is hard to read. | 1 |
+| 14 | high     | Images | Hero and portrait are Unsplash placeholders; the portrait is an anonymous silhouette labelled as María, and the hero source is only 800 px wide. `public/hero-bg.jpg`, `public/painter.jpg` and `public/favicon.ico` are 1-byte files, and the last one replaces `src/app/favicon.ico`, so `/favicon.ico` is broken. The SVGs in `public` other than `favicon.svg` are unused. | 2 |
+| 15 | high     | Links | Instagram and WhatsApp point to `#`. Both Live art buttons do nothing. | 2 |
+| 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
+| 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
+| 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
+| 2  | medium   | Tooling | Only `package-lock.json` is tracked, so Vercel installs with npm. `pnpm-lock.yaml` is not in the repo. | 0 |
+| 3  | medium   | Tooling | `lint` runs the deprecated `next lint`, which newer Next.js removes. The ESLint config ignores no folders, so `eslint .` reports thousands of errors once `.next` exists. No `typecheck` or `test` script. | 0 |
+| 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
+| 26 | medium   | Security | No `X-Content-Type-Options`, `X-Frame-Options` (or equivalent frame rule), `Referrer-Policy` or `Permissions-Policy` header. `X-Powered-By` is sent (`poweredByHeader: false` removes it). | 0 |
+| 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
+| 27 | medium   | Errors | `error.tsx` shows the raw error message to visitors (§9) and logs the error in the browser console. | 0 |
+| 6  | medium   | CSS | The unlayered `p` rule in `globals.css` overrides Tailwind's size and line-height utilities, so `text-xl` on a paragraph renders at 16 px. | 1 |
+| 8  | medium   | Fonts | `Quicksand` and `Dancing Script` are referenced but never loaded, so a fallback shows. `body` is set to Arial. | 1 |
+| 10 | medium   | Header | Offsets such as `mr-64` misplace the subtitle on narrow screens. `/`, `/live-art` and `/about-us` scroll horizontally by 1 px at 375 px (48 px at 320 px). The whole header is a client component. | 1 |
+| 11 | medium   | Navigation | `Navbar` renders a second, never visible `MobileMenu`. The nav item list is duplicated. The menu button has no `aria-expanded`, Escape and outside clicks don't close the menu, and without JavaScript phones have no navigation. | 1 |
+| 12 | medium   | Accessibility | Pages have several `h1` elements, some duplicated for mobile and desktop. `lang="en"` on Spanish content. No skip link. | 1, 2 |
+| 30 | medium   | FAQ | FAQ buttons have no visible focus style and no `aria-controls`. Answers are missing from the HTML, so they can't be read without JavaScript. | 2 |
+| 31 | medium   | Home | No call to action to Contact, and the two services don't link anywhere (§5). | 2 |
+| 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
+| 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
+| 4  | low      | Config | `next.config.ts` uses `module.exports` and the deprecated `images.domains`. | 0 |
+| 5  | low      | Config | `@netlify/plugin-nextjs` is installed but unused: hosting is Vercel. `README.md` is the create-next-app default. | 0 |
+| 22 | low      | Config | `package.json` sets no `engines` or `packageManager`. Vercel builds with Node 26 and `@types/node` is on 20. | 0 |
+| 23 | low      | Dependencies | `package-lock.json` pins development packages with advisories, several high (for example `minimatch`, `flatted`, `js-yaml`). A fresh resolution reports none of them. | 0 |
+| 28 | low      | Logging | The API logs the whole mail error object, which can include email addresses (§9). | 0 |
+| 7  | low      | CSS | System dark mode changes the `body` colors, but pages are designed light only. Most elements set their own colors, which hides it. | 1 |
+| 9  | low      | Animation | `animate-fade-in` is used but not defined, so nothing fades. | 1 |
+| 32 | low      | Footer | No link to Contact (§5), the year is hardcoded as 2025, and the icon links are 36 px (the menu button is 40 × 30 px). | 1 |
+| 33 | low      | Performance | The whole Contact page is a client component (§8). | 2 |
+| 19 | low      | Errors | `error.tsx` is unstyled and in English. There is no `not-found.tsx`, so the 404 page is the English default. | 4 |
 
 ---
 
