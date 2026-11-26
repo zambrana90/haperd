@@ -81,7 +81,6 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 16 | high     | Contact | The form asks only for a message, so nobody can reply to it. | 3 |
 | 17 | high     | Contact | A 400 or 500 response clears the message and shows nothing. A network failure keeps the text but shows nothing. A success shows no confirmation. | 3 |
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
-| 2  | medium   | Tooling | Only `package-lock.json` is tracked, so Vercel installs with npm. `pnpm-lock.yaml` is not in the repo. | 0 |
 | 3  | medium   | Tooling | `lint` runs the deprecated `next lint`, which newer Next.js removes. The ESLint config ignores no folders, so `eslint .` reports thousands of errors once `.next` exists. No `typecheck` or `test` script. | 0 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 26 | medium   | Security | No `X-Content-Type-Options`, `X-Frame-Options` (or equivalent frame rule), `Referrer-Policy` or `Permissions-Policy` header. `X-Powered-By` is sent (`poweredByHeader: false` removes it). | 0 |
@@ -98,8 +97,8 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
 | 4  | low      | Config | `next.config.ts` uses `module.exports` and the deprecated `images.domains`. | 0 |
 | 5  | low      | Config | `@netlify/plugin-nextjs` is installed but unused: hosting is Vercel. `README.md` is the create-next-app default. | 0 |
-| 22 | low      | Config | `package.json` sets no `engines` or `packageManager`. Vercel builds with Node 26 and `@types/node` is on 20. | 0 |
-| 23 | low      | Dependencies | `package-lock.json` pins development packages with advisories, several high (for example `minimatch`, `flatted`, `js-yaml`). A fresh resolution reports none of them. | 0 |
+| 22 | low      | Config | `@types/node` is on 20, while `engines` requires Node 26 or later. | 0 |
+| 23 | low      | Dependencies | `pnpm-lock.yaml` pins packages with advisories beyond those in #1, several high: `nanoid` and `source-map-js` in production, and development packages such as `minimatch`, `flatted` and `js-yaml`. A fresh resolution reports none of them. | 0 |
 | 28 | low      | Logging | The API logs the whole mail error object, which can include email addresses (§9). | 0 |
 | 7  | low      | CSS | System dark mode changes the `body` colors, but pages are designed light only. Most elements set their own colors, which hides it. | 1 |
 | 9  | low      | Animation | `animate-fade-in` is used but not defined, so nothing fades. | 1 |
