@@ -1,35 +1,23 @@
-import React, { useState } from 'react';
+import type { FaqItem } from '@/content/faq';
 
-interface FAQItemProps {
-  question: string;
-  answer: string;
-}
-
-export function FAQCollapse({ question, answer }: FAQItemProps) {
-  const [open, setOpen] = useState(false);
+/**
+ * One question and its answer. A native `<details>`, so it works with the
+ * keyboard and without JavaScript, and the answer is always in the HTML.
+ */
+export function FAQCollapse({ question, answer }: FaqItem) {
   return (
-    <div className='border border-[#b18a8b] rounded-md bg-white mb-2'>
-      <button
-        type='button'
-        className='w-full flex items-center justify-between p-4 font-mono text-[#2a2341] text-lg focus:outline-none cursor-pointer'
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-      >
-        <span
-          className={`transition-transform duration-200 ml-2 ${
-            open ? 'rotate-90' : ''
-          }`}
+    <details className='group rounded-field border border-rose-soft bg-white'>
+      <summary className='flex min-h-12 cursor-pointer list-none items-center gap-3 rounded-field p-4 text-lg font-semibold text-ink hover:bg-blush focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy [&::-webkit-details-marker]:hidden'>
+        <svg
           aria-hidden='true'
+          viewBox='0 0 16 16'
+          className='size-4 shrink-0 fill-current group-open:rotate-90 motion-safe:transition-[rotate] motion-safe:duration-fast motion-safe:ease-gentle'
         >
-          ▶
-        </span>
-        <span className="text-left w-full pl-[12px]">{question}</span>
-      </button>
-      {open && (
-        <div className='px-4 pb-4 text-[#b18a8b] font-mono text-base animate-fade-in'>
-          {answer}
-        </div>
-      )}
-    </div>
+          <path d='M4 2l10 6-10 6z' />
+        </svg>
+        <span className='min-w-0'>{question}</span>
+      </summary>
+      <p className='px-4 pt-2 pb-4 text-base text-ink'>{answer}</p>
+    </details>
   );
 }

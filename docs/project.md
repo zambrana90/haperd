@@ -64,7 +64,7 @@ Checked on 2026-11-26, at commit `4ff5069`: Phase 0 done. `pnpm lint`, `pnpm typ
 | `/contact`     | `src/app/contact/page.tsx`     | Intro, message box, three FAQs                      |
 | `/api/contact` | `src/app/api/contact/route.ts` | Sends the message over SMTP with `nodemailer`       |
 
-Shared components in `src/components`: `Header`, `SkipLink`, `Navbar`, `MobileMenu` (with `MobileMenuToggle` and `NavLink`), `Footer`, `FAQCollapse`, and the base components in `ui/`. Nav items and site constants are in `src/content`.
+Shared components in `src/components`: `Header`, `SkipLink`, `Navbar`, `MobileMenu` (with `MobileMenuToggle` and `NavLink`), `Footer`, `ContactForm`, `FAQCollapse`, and the base components in `ui/`. Nav items, FAQ and site constants are in `src/content`.
 
 ### Known problems
 
@@ -79,11 +79,8 @@ From the Phase 0 audit. Each row is assigned to a phase in `plan.md`, unless the
 | 18 | high     | Contact API | No length limit, rate limit, honeypot, or content-type or origin check, so any website can make a visitor's browser post to it. Invalid or `null` JSON returns an empty 500. Responses don't match §6.2. The Vercel project has no environment variables, so sending would fail there. | 3 |
 | 25 | medium   | Privacy | Commit metadata holds personal data: the author fields of `e54da7d` contain a work email address and a local file path with a user name, the author name of `c1bd7b3` looks like an employee ID, and later commits carry a personal email. Accepted by owner (2026-11-26), no history rewrite. | — |
 | 34 | medium   | Security | No `Content-Security-Policy` header. | 5 |
-| 13 | medium   | Contrast | FAQ answers are soft rose `#b18a8b` on white (3.05:1); body text needs 4.5:1. The rest of this row was fixed in Phase 1. | 2 |
-| 30 | medium   | FAQ | FAQ buttons have no visible focus style and no `aria-controls`. Answers are missing from the HTML, so they can't be read without JavaScript. | 2 |
 | 29 | medium   | Contact | The message field's label is not linked to it, so the field is named only by its placeholder. | 3 |
 | 20 | medium   | SEO | Every page has the same title and an English description. No Open Graph data, `sitemap` or `robots` (both return 404). | 4 |
-| 33 | low      | Performance | The whole Contact page is a client component (§8). | 2 |
 | 19 | low      | Errors | `error.tsx` is unstyled and in English. There is no `not-found.tsx`, so the 404 page is the English default. | 4 |
 
 ---
@@ -111,6 +108,7 @@ No new pages. We improve the four that exist.
 **Copy rules**
 
 - Keep the existing Spanish text. Improve layout, not wording.
+- Voice: the business speaks as "we". María's life story stays in "I".
 - New text is short and in Spanish. List it in the PR so the owner can approve it.
 - The "¿Cómo trabajamos?" steps don't exist yet. Ask the owner for them. Never invent how the business works, prices or testimonials.
 
@@ -276,7 +274,6 @@ The owner answers these. Delete a row once answered, and write the answer where 
 | 1  | Real images: hero artwork, María's portrait, live art photos, logo or favicon                                | Phase 2   |
 | 2  | Instagram URL and WhatsApp number                                                                            | Phase 2   |
 | 3  | The "¿Cómo trabajamos?" steps                                                                                | Phase 2   |
-| 4  | Voice: Home says "nuestro equipo", Contact says "mi servicio". Keep both, or pick one?                       | Phase 2   |
 | 5  | Brevo account, verified sender (ideally a domain with SPF/DKIM set up), recipient address                    | Phase 3   |
 | 6  | Is `haperd.com` registered, and is `hola@haperd.com` a working inbox?                                        | Phase 3   |
 | 7  | Privacy notice: the form collects personal data, which usually requires one under GDPR. What text, and where? | Phase 3   |
